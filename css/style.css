@@ -11,7 +11,7 @@
 
 header{
     background-color: blue;
-    height: 4rem;
+    height: 5rem;
     h1 {color: white; padding-bottom: 0.2rem;}
     .logo img{
         height: 3rem;
@@ -32,10 +32,10 @@ footer{
     padding-block: 2rem;
 }
 
-select{
-    min-width: 10ch;
+select, input{
+    margin: 0.5rem;
     padding: 0.5rem;
-    margin: 1rem;
+    min-width: 10ch;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -112,7 +112,7 @@ select{
 [data-type="3"] {
     background-color: var(--type-3, #f0f0f0);
 }
-[data-type="4"] {
+.day[data-type="4"] {
     background-color: var(--type-4, #f0f0f0);
 }
 [data-type="5"] {
@@ -129,4 +129,33 @@ select{
 }
 [data-type="9"] {
     background-color: var(--type-9, #f0f0f0);
+}
+
+.statistics{
+    margin: 1rem 4rem;
+    background-color: LightSteelBlue ;
+    padding: 1rem;
+    text-align: left;
+    line-height: 1.4;
+    .statistics-title{
+        margin-bottom: 0.5rem;
+    }
+}
+
+.offcanvas {
+    position: fixed;
+    bottom: -200px; /* Αρχικά κρυμμένο κάτω από την οθόνη */
+    left: 0;
+    width: 100%;
+    max-height: 200px; /* Ρύθμισε το ύψος όπως θες */
+    background: white;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+    transition: bottom 0.3s ease-in-out;
+    padding: 20px;
+    h3{
+        margin: 0.4rem 0 1rem 0;
+    }
+}
+.offcanvas.active {
+    bottom: 0;
 }

@@ -30,10 +30,26 @@
 
 <main>
 
+    <div class="statistics">
+        <h4 class="statistics-title">Έτος <span data-variable="Έτος">2025</span></h4>
+        <p>Άδειες: <span data-variable="Άδειες">0</span></p>
+        <p>Ασθένειες: <span data-variable="Ασθένειες">0</span></p>
+        <p>Απεργίες: <span data-variable="Απεργίες">0</span></p>
+    </div>
+
     <div id="calendar" class="calendar"></div>
     <div>
         <label for="year-select">Επιλογή έτους: </label>
         <select id="year-select"></select>
+    </div>
+
+    <div id="edit" class="offcanvas">
+        <h3 data-variable="edit-date">13 Μαρτίου 2025</h3>
+        <div><select id="edit-select" class="edit-auto-save"></select></div>
+        <div>
+            <label for="edit-note">Σημείωση</label>
+            <input type="text" id="edit-note" class="edit-auto-save">
+        </div>
     </div>
 
 

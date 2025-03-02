@@ -7,20 +7,24 @@ let Calendar = {
         localStorage.setItem("days", JSON.stringify(this.days));
         Q(`#day-${date}`).element.setAttribute("data-type", type);
         Q(`#day-${date}`).element.setAttribute("data-note", note);
-        return this.days;
+        this.endAction();
     },
     remove: function(date) {
         this.days = this.days.filter(day => day.date !== date);
         localStorage.setItem("days", JSON.stringify(this.days));
         Q(`#day-${date}`).element.removeAttribute("data-type");
         Q(`#day-${date}`).element.removeAttribute("data-note");
-        return this.days;
+        this.endAction();
     },
     empty: function() {
         this.days = [];
         localStorage.setItem("days", JSON.stringify(this.days));
-        return this.days;
+        this.endAction();
     },
+    endAction: function() {
+        calculateStatistics(currentYear);
+        return this.days;
+    }
 };
 
 function showUserDays() {
@@ -40,11 +44,59 @@ if (localStorage.getItem("days")) {
 }
 
 
+function calculateStatistics(year=currentYear) {
+    let statistics = {
+        total: 0,
+        types: {},
+        notes: {},
+    };
+    Calendar.days.forEach(day => {
+        if (new Date(day.date).getFullYear() !== year) {return}
+        statistics.total++;
+        statistics.types[day.type] = statistics.types[day.type] ? statistics.types[day.type] + 1 : 1;
+    });
+    Q("~Έτος").set(currentYear);
+    Q("~Άδειες").set(statistics.types[4] || 0);
+    Q("~Ασθένειες").set(statistics.types[6] || 0);
+    Q("~Απεργίες").set(statistics.types[5] || 0);
+    return statistics;
+}
+calculateStatistics(currentYear);
+
 
 Q(".day").on("click", function() {
-    console.log(this.id);
+    // console.log(this.id);
     // this.setAttribute("data-type", 4);
+    Q("#edit").classList.add("active");
+    let dateInGreek = new Date(this.id).toLocaleDateString('el-GR',{dateStyle: 'full'});  // Δουλεύει!
+    Q("~edit-date").set(dateInGreek);
+    Q("#edit-note").value = this.getAttribute("data-note")??'';
+    Q("#edit-select").value = this.getAttribute("data-type")??'0';
 });
+
+document.addEventListener('click', function(event) {
+    if (Q("#edit") && !event.target.classList.contains("day") && !event.target.closest("#edit")) {
+        Q("#edit").classList.remove('active');
+    }
+});
+
+Q(".edit-auto-save").on("input", function() {
+    let userDay = {
+        date: (Q(".day.selected")[0].id).substr(4),
+        type: Q("#edit-select").value,
+        note: Q("#edit-note").value,
+    }
+    Calendar.remove(userDay.date);
+    console.log(userDay);
+    if (userDay.type === '0') {
+        return;
+    }
+    Calendar.add(userDay);
+});
+
+
+
+
 
 
 // Copyright 

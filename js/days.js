@@ -43,6 +43,12 @@ dayTypes.forEach((dayType,index) => {
     Q.setCssVariable(`--type-${index}`, dayType.color);
 });
 
+function showEditOptions() {
+    let dayTypeSelectOptionsHTML = dayTypes.map((dayType, index) => `<option value="${index}">${dayType.name}</option>`).join("");
+    Q("#edit-select").element.innerHTML = dayTypeSelectOptionsHTML;
+}
+showEditOptions();
+
 /** Μετατρέπει μια ημερομηνία στη μορφή που χρησιμοποιείται από την Εφαρμογή */
 let propper = date => date.toISOString().split('T')[0];
 
@@ -53,7 +59,7 @@ function showToday(){
     const today = new Date();
     if (!Q(`#day-${propper(today)}`)) {return}
     Q(`#day-${propper(today)}`).classList.add("today");
-    Q(`#day-${propper(today)}`).element.setAttribute("data-tooltip", "Σήμερα");
+    Q(`#day-${propper(today)}`).element.setAttribute("data-note", "Σήμερα");
 }
 showToday();
 
@@ -88,7 +94,7 @@ let easter = new Map([
 const movingHolidays = new Map([
     ["-48", "Καθαρά Δευτέρα"],
     ["-2", "Μεγάλη Παρασκευή"],
-    ["0", "Πάσχα"],
+    ["0", "Κυριακή του Πάσχα"],
     ["1", "Δευτέρα του Πάσχα"],
     ["49", "Πεντηκοστή"],
     ["50", "Αγίου Πνεύματος"],
@@ -120,7 +126,7 @@ let holidays = year => {
 function showHolidays() {
     holidays(currentYear).forEach((holiday, date) => {
         Q(`#day-${date}`).element.setAttribute("data-type", 3);
-        Q(`#day-${date}`).element.setAttribute("data-tooltip", holiday);
+        Q(`#day-${date}`).element.setAttribute("data-note", holiday);
     });
 }
 showHolidays();
@@ -180,7 +186,7 @@ function getPaydays(year) {
 function showPaydays() {
     getPaydays(currentYear).forEach((paydayDescription, date) => {
         Q(`#day-${date}`).element.setAttribute("data-type", 8);
-        Q(`#day-${date}`).element.setAttribute("data-tooltip", paydayDescription);
+        Q(`#day-${date}`).element.setAttribute("data-note", paydayDescription);
     });
 }
 showPaydays();
@@ -194,4 +200,5 @@ document.addEventListener("calendarGenerated", function(event) {
     showHolidays();
     showPaydays();
     showUserDays();
+    calculateStatistics();
 });
