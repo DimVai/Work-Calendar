@@ -1,5 +1,6 @@
 
 :root {
+    --main-color: #0026f9;
     /* --type-default: hsl(0, 0%, 94%); */
     --type-default: Snow;
     --weekday-label: Gainsboro;
@@ -11,7 +12,7 @@
 /*************   General   *************/
 
 header{
-    background-color: blue;
+    background-color: var(--main-color);
     height: 5rem;
     h1 {color: white; padding-bottom: 0.2rem;}
     .logo img{
