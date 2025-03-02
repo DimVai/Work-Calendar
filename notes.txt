@@ -1,10 +1,4 @@
 
-Επίσης
-
-Today, ok
-Payday
-
-
 Κινητές εορτές
 Καθαρά Δευτέρα, 48 ημέρες πριν το Πάσχα
 Μεγάλη Παρασκευή
@@ -13,36 +7,3 @@ Payday
 Πεντηκοστή: Κυριακή 49 Μέρες  μετά το Πάσχα
 Αγίου πνεύματος: Δευτέρα 50 μέρες μετά το Πάσχα
 
-
-
-
-
-let holidays = year => new Map([...fixedholidays, ...getMovingHolidays(year)]);     // Σε μορφή ΜΜ-ΗΗ (κι όχι ΕΕΕΕ-ΜΜ-ΗΗ)
-`${String(holidayDate.getMonth() + 1).padStart(2, '0')}-${String(holidayDate.getDate()).padStart(2, '0')}`
-
-
-
-    // Από κάθε lastDay, βρίσκουμε την προηγούμενη εργάσιμη ημέρα
-    let lastWorkdays = new Map();
-    paydays.forEach((day, index) => {
-        let lastWorkday = new Date(year, index, day);
-        while (lastWorkday.getDay() === 0 || lastWorkday.getDay() === 6 || holidays(year).has(`${String(lastWorkday.getMonth() + 1).padStart(2, '0')}-${String(lastWorkday.getDate()).padStart(2, '0')}`)) {
-            lastWorkday.setDate(lastWorkday.getDate() - 1);
-        }
-        let lastWorkdayString = `${String(lastWorkday.getMonth() + 1).padStart(2, '0')}-${String(lastWorkday.getDate()).padStart(2, '0')}`;
-        lastWorkdays.set(lastWorkdayString, "Τελευταία Εργάσιμη");
-    });
-    console.log(lastWorkdays);
-
-    return lastWorkdays;
-
-
-
-        paydays.forEach((payday, date) => {
-        while (holidayDates.has(date) || new Date(date).getDay() === 0 || new Date(date).getDay() === 6) {
-            let newDate = new Date(date);
-            newDate.setDate(newDate.getDate() - 1);
-            date = propper(newDate);
-        }
-        paydays.set(date, payday);
-    });

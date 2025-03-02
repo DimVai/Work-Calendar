@@ -6,11 +6,11 @@ let dayTypes = [
     },
     {   // 1
         name: "Εργάσιμη",
-        color: "white",
+        color: "Snow",
     },
     {   // 2
         name: "Ρεπό",
-        color: "PaleGreen",
+        color: "hsl(195, 53%, 75%)",
     },
     {   // 3
         name: "Αργία",
@@ -22,7 +22,7 @@ let dayTypes = [
     },
     {   // 5
         name: "Απεργία",
-        color: "red",
+        color: "Red",
     },
     {   // 6
         name: "Ασθένεια",
@@ -30,7 +30,7 @@ let dayTypes = [
     },
     {   // 7
         name: "Γιορτή",
-        color: "purple",
+        color: "Purple",
     },
     {   // 8
         name: "Μισθοδοσία",
@@ -40,7 +40,7 @@ let dayTypes = [
 
 // Χρώμα ημέρών με βάση τον τύπο τους
 dayTypes.forEach((dayType,index) => {
-    Q.setCssVariable(`--type-${index}`, dayType.color);
+    if (dayType.color) {Q.setCssVariable(`--type-${index}`, dayType.color)};
 });
 
 function showEditOptions() {
