@@ -2,7 +2,7 @@
 :root {
     --main-color: #0026f9;
     /* --type-default: hsl(0, 0%, 94%); */
-    --white-default: Snow;
+    --white-background: Snow;
     --weekday-label: Gainsboro;
     --today: blue;
     --type-weekend: hsl(195, 53%, 85%);
@@ -35,15 +35,31 @@ footer{
     padding-block: 2rem;
 }
 
-select, input{
+select, input, textarea{
     margin: 0.5rem;
     padding: 0.5rem;
-    min-width: 10ch;
+    min-width: 22ch;
+    /* max-width: 90%; */
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: var(--white-default);
+    background-color: var(--white-background);
+    resize: none;
+    &[disabled]{
+        background-color: hsl(0, 0%, 90%);
+    }
 }
+#year-select{
+    text-align: center;
+    min-width: 15ch;
+}
+textarea{
+    padding: 0.6rem 0.7rem;
+}
+/* select{
+    cursor: pointer;
+    text-align: center;
+} */
 
 
 /*************   Calendar   *************/
@@ -73,7 +89,7 @@ select, input{
     margin: auto;
 }
 .day, .weekday {
-    background: var(--white-default);
+    background: var(--white-background);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10%;
@@ -112,8 +128,6 @@ select, input{
     font-weight: 900;
 }
 
-
-
 .day[data-type="1"] {
     background-color: var(--type-1, #f0f0f0);
 }
@@ -147,6 +161,7 @@ select, input{
     font-weight: bold;
 }
 
+
 .statistics{
     margin: 1rem auto;
     max-width: 350px;
@@ -160,7 +175,6 @@ select, input{
 }
 
 .offcanvas {
-
     position: fixed;
     bottom: -200px; /* Αρχικά κρυμμένο κάτω από την οθόνη */
     left: 0;
@@ -168,12 +182,33 @@ select, input{
 
     max-height: 200px; /* Ρύθμισε το ύψος όπως θες */
     background: hsl(240, 67%, 92%);
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
     transition: bottom 0.3s ease-in-out;
     padding: 20px;
+    z-index: 100;
     h3{
         margin: 0.4rem 0 1rem 0;
     }
+    #edit-note{
+        field-sizing: content;
+        /* max-width: 35ch; */
+    }
+}
+.edit-form{
+    /* border: 1px solid #ccc; */
+    margin: auto;
+    /* width: fit-content; */
+    /* max-width: 100%; */
+    /* select, textarea{
+        text-align: right;
+    } */
+}
+.edit-form > div {
+    /* border: 1px solid #ccc; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 .offcanvas.active {
     bottom: 0;

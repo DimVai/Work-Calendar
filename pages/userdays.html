@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" style="color-scheme:dark;">
+    <div id="userDays"></div>
+<script>
+let days = localStorage.getItem('days');
+console.log(days);
+let userDays = document.getElementById('userDays');
+let userDaysHTML = '';
+if (days) {
+    days = JSON.parse(days);
+    for (let day of days) {
+        userDaysHTML += `<div>${day.type} - ${day.date} - ${day.note}</div>`;
+    }
+}
+userDays.innerHTML = userDaysHTML;
+</script>
+
+
+</html>

@@ -63,6 +63,14 @@ function calculateStatistics(year=currentYear) {
 }
 calculateStatistics(currentYear);
 
+function enableOrDisableNoteField() {
+    if (Q("#edit-select").value === '0') {
+        Q("#edit-note").element.setAttribute("disabled", true);
+    } else {
+        Q("#edit-note").element.removeAttribute("disabled");
+    }
+}
+
 // Κλικ σε κάποια μέρα
 Q(".day").on("click", function() {
     // console.log(this.id);
@@ -72,6 +80,7 @@ Q(".day").on("click", function() {
     Q("~edit-date").set(dateInGreek);
     Q("#edit-note").value = this.getAttribute("data-note")??'';
     Q("#edit-select").value = this.getAttribute("data-type")??'0';
+    enableOrDisableNoteField();
 });
 
 // hide edit on click outside
@@ -83,6 +92,7 @@ document.addEventListener('click', function(event) {
 
 // Αλλαγή τιμής στο edit (auto save)
 Q(".edit-auto-save").on("input", function() {
+    enableOrDisableNoteField();
     let userDay = {
         date: (Q(".day.selected")[0].id).substr(4),
         type: Q("#edit-select").value,
