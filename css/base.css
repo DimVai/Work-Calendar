@@ -1,0 +1,116 @@
+
+
+/********************* BASIC BOILERPLATE CORRECTIONS *********************/
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Set core root defaults */
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+/* Remove default margin and padding */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+  /* text-wrap: balance; */
+}
+ol, ul, li{
+    margin-block: 0;
+}
+
+/* Do not stick to edges of page */
+body > * {
+    /* max-width: min(100% - 2rem, 50rem); */
+    margin-inline: auto; /*centers*/
+    padding: 0.4rem;
+}  
+
+/* Make images easier to work with */
+img,
+svg,
+.center,
+picture,
+figure {
+    display: block;
+    max-width: 100%;
+    margin-inline: auto;		
+    text-align: center;	/*text inside figure*/
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Links */
+a{
+    text-decoration: none;
+    box-shadow: none;
+    transition: all 0.3s; 
+    font-weight: bold;
+    color: Blue;
+}
+a:hover{color: black}
+a:focus{outline: black solid 3px}
+
+
+
+/*********************  HEADER FOOTER   *********************/
+
+/* Header */
+header, header a:first-of-type, header nav>ul {    /*header, left logo, right navs*/
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;  /*vertical align, when big logo*/
+    list-style-type: none; 
+    gap: 0.7rem;
+}
+
+/* Footer*/
+footer, footer p{font-size: small}
+
+
+
+/* classes */
+.container{
+    max-width: min(100% - 2rem, 50rem);
+    margin-inline: auto; /*centers */
+    overflow-x: hidden;
+}
+
+
+
+/*********************  DIM SPECIAL   *********************/
+
+/* Prevent all non-defined custom elements from displaying: */
+*:not(:defined) { display: none; }
+
+/* Hide cloaked elements for Alpine.js */
+[x-cloak] { display: none !important; }
+
+/* Hide elements, for my js scripts */
+.d-none{display: none !important;}
+
+/* View transition between pages */
+@view-transition {
+    navigation: auto;
+}

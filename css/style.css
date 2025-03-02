@@ -1,0 +1,132 @@
+
+:root {
+    --type-default: #f0f0f0;
+    --type-weekend: MediumSpringGreen;
+    --weekday-label: LightGray;
+    --today: blue;
+}
+
+
+/*************   General   *************/
+
+header{
+    background-color: blue;
+    height: 4rem;
+    h1 {color: white; padding-bottom: 0.2rem;}
+    .logo img{
+        height: 3rem;
+    }
+}
+
+body{
+    background-color: lavender;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+main{
+    padding-bottom: 25ch;
+}
+
+footer{
+    padding-block: 2rem;
+}
+
+select{
+    min-width: 10ch;
+    padding: 0.5rem;
+    margin: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+/*************   Calendar   *************/
+
+.calendar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    margin: 2rem;
+}
+.month {
+    /* margin: 20px 0; */
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 300px;
+    margin: auto;
+}
+.day, .weekday {
+    padding: 10px;
+    background: var(--type-default);
+    border: 1px solid #ccc;
+    border-radius: 10%;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.5s;
+}
+.weekday {
+    font-weight: bold;
+    background: var(--weekday-label);
+    cursor: default;
+}
+.day:hover {
+    background: #dcdcdc;
+}
+.day.selected, .day.selected:hover {
+    background: black;
+    color: white;
+}
+.month-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-block: 1rem;
+}
+
+
+/* saturday and sunday */
+.day-6, .day-0 {
+    /* background-color: LightGreen; */
+    background-color: var(--type-weekend, MediumSpringGreen);
+    color: black;
+}
+.today{
+    background-color: var(--today);
+    color: white;
+    border: 2px solid black;
+}
+
+
+
+[data-type="1"] {
+    background-color: var(--type-1, #f0f0f0);
+}
+[data-type="2"] {
+    background-color: var(--type-2, #f0f0f0) !important;
+}
+[data-type="3"] {
+    background-color: var(--type-3, #f0f0f0) !important;
+}
+[data-type="4"] {
+    background-color: var(--type-4, #f0f0f0) !important;
+}
+[data-type="5"] {
+    background-color: var(--type-5, #f0f0f0) !important;
+}
+[data-type="6"] {
+    background-color: var(--type-6, #f0f0f0) !important;
+}
+[data-type="7"] {
+    background-color: var(--type-7, #f0f0f0) !important;
+}
+[data-type="8"] {
+    background-color: var(--type-8, #f0f0f0) !important;
+}
+[data-type="9"] {
+    background-color: var(--type-9, #f0f0f0) !important;
+}
