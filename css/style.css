@@ -6,6 +6,7 @@
     --weekday-label: Gainsboro;
     --today: blue;
     --type-weekend: hsl(195, 53%, 85%);
+    --violet: hsl(270, 100%, 75%);
 }
 
 
@@ -54,12 +55,19 @@ select, input{
     margin: 2rem;
 }
 .month {
-    /* margin: 20px 0; */
+    padding: 1.2rem;
+    border: 2px solid DarkRed;
+    border-radius: 1.2rem;
+}
+.month-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 .grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+    gap: 4px;
     max-width: 300px;
     margin: auto;
 }
@@ -85,14 +93,12 @@ select, input{
     background: black;
     color: white;
 }
-.month-title {
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-block: 1rem;
-}
 
 
-/* saturday and sunday */
+
+/*************   Days   *************/
+
+/* Σάββατο, Κυριακή */
 .day-6, .day-0 {
     /* background-color: LightGreen; */
     background-color: var(--type-weekend, MediumSpringGreen);
@@ -125,8 +131,9 @@ select, input{
 .day[data-type="6"] {
     background-color: var(--type-6, #f0f0f0);
 }
-.day[data-type="7"] {
+.day[data-type="7"] {   /* Γιορτή */ 
     background-color: var(--type-7, #f0f0f0);
+    color: snow !important;
 }
 .day[data-type="8"] {
     background-color: var(--type-8, #f0f0f0);
@@ -140,9 +147,10 @@ select, input{
 }
 
 .statistics{
-    margin: 1rem 4rem;
-    background-color: LightSteelBlue ;
+    margin: 1rem auto;
+    max-width: 350px;
     padding: 1rem;
+    background-color: LightSteelBlue ;
     text-align: left;
     line-height: 1.4;
     .statistics-title{

@@ -34,7 +34,8 @@ let dayTypes = [
     },
     {   // 8
         name: "Μισθοδοσία",
-        color: "Violet",    
+        // color: "Violet",
+        color: "hsl(270, 100%, 86%)",
     }
 ];
 
