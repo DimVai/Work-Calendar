@@ -55,7 +55,10 @@ function showEditOptions() {
 showEditOptions();
 
 /** Μετατρέπει μια ημερομηνία στη μορφή που χρησιμοποιείται από την Εφαρμογή */
-let propper = date => date.toISOString().split('T')[0];
+let propper = date => {
+    return date.toLocaleDateString('el-GR', { year: 'numeric', month: '2-digit', day: '2-digit' })
+        .split('/').reverse().join('-');
+};
 
 
 
@@ -106,7 +109,7 @@ const movingHolidays = new Map([
 ]);
 
 function getMovingHolidays(year) {
-    let easterDate = new Date(`${year}-${easter.get(year)}`);       // Ημερομηνία του Πάσχα σε propper format
+    let easterDate = new Date(`${year}-${easter.get(year)}`);       // Ημερομηνία του Πάσχα
     let movingHolidaysDates = new Map();
     movingHolidays.forEach((holiday, offset) => {
         let holidayDate = new Date(easterDate);
