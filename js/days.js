@@ -65,6 +65,8 @@ let propper = date => {
 // Σημερινή ημέρα
 function showToday(){
     const today = new Date();
+    // change today for testing purposes
+    // today.setDate(today.getDate() + 2);
     if (!Q(`#day-${propper(today)}`)) {return}
     Q(`#day-${propper(today)}`).classList.add("today");
     Q(`#day-${propper(today)}`).element.setAttribute("data-note", "Σήμερα");
