@@ -63,7 +63,7 @@ function calculateStatistics(year=currentYear) {
 }
 calculateStatistics(currentYear);
 
-
+// Κλικ σε κάποια μέρα
 Q(".day").on("click", function() {
     // console.log(this.id);
     // this.setAttribute("data-type", 4);
@@ -74,21 +74,24 @@ Q(".day").on("click", function() {
     Q("#edit-select").value = this.getAttribute("data-type")??'0';
 });
 
+// hide edit on click outside
 document.addEventListener('click', function(event) {
     if (Q("#edit") && !event.target.classList.contains("day") && !event.target.closest("#edit")) {
         Q("#edit").classList.remove('active');
     }
 });
 
+// Αλλαγή τιμής στο edit (auto save)
 Q(".edit-auto-save").on("input", function() {
     let userDay = {
         date: (Q(".day.selected")[0].id).substr(4),
         type: Q("#edit-select").value,
         note: Q("#edit-note").value,
     }
-    Calendar.remove(userDay.date);
-    console.log(userDay);
+    Calendar.remove(userDay.date);   // Διαγραφή παλιάς μέρας
+    // console.log(userDay);
     if (userDay.type === '0') {
+        Q("#edit-note").value = '';
         return;
     }
     Calendar.add(userDay);

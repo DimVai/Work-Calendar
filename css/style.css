@@ -2,11 +2,11 @@
 :root {
     --main-color: #0026f9;
     /* --type-default: hsl(0, 0%, 94%); */
-    --type-default: Snow;
+    --white-default: Snow;
     --weekday-label: Gainsboro;
     --today: blue;
     --type-weekend: hsl(195, 53%, 85%);
-    --violet: hsl(270, 100%, 75%);
+    --background-color: lavender;
 }
 
 
@@ -22,7 +22,7 @@ header{
 }
 
 body{
-    background-color: lavender;
+    background-color: var(--background-color);
     font-family: Arial, sans-serif;
     text-align: center;
 }
@@ -42,6 +42,7 @@ select, input{
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: var(--white-default);
 }
 
 
@@ -72,7 +73,7 @@ select, input{
     margin: auto;
 }
 .day, .weekday {
-    background: var(--type-default);
+    background: var(--white-default);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10%;
@@ -159,12 +160,14 @@ select, input{
 }
 
 .offcanvas {
+
     position: fixed;
     bottom: -200px; /* Αρχικά κρυμμένο κάτω από την οθόνη */
     left: 0;
     width: 100%;
+
     max-height: 200px; /* Ρύθμισε το ύψος όπως θες */
-    background: white;
+    background: hsl(240, 67%, 92%);
     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
     transition: bottom 0.3s ease-in-out;
     padding: 20px;

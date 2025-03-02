@@ -1,7 +1,7 @@
 /** Είδη ημερών */
 let dayTypes = [
     {   // 0
-        name: "Προεπιλογή",
+        name: "Προεπιλογή εφαρμογής",
         color: null,
     },
     {   // 1
@@ -36,6 +36,10 @@ let dayTypes = [
         name: "Μισθοδοσία",
         // color: "Violet",
         color: "hsl(270, 100%, 86%)",
+    },
+    {   // 9
+        name: "Σημείωση",
+        color: "Gold",
     }
 ];
 
