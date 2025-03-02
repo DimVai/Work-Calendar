@@ -57,6 +57,12 @@ function generateCalendar(year) {
         monthDiv.appendChild(grid);
         calendar.appendChild(monthDiv);
     });
+
+    // Δημιουργία και dispatch custom event
+    const event = new CustomEvent("calendarGenerated", {
+        detail: { year }
+    });
+    document.dispatchEvent(event);
 }
 
 function selectDay(dayId) {
@@ -68,7 +74,7 @@ function selectDay(dayId) {
     }
     selectedDayId = dayId;
     document.getElementById(dayId).classList.add("selected");
-    console.log("Selected day:", selectedDayId);
+    // console.log("Selected day:", selectedDayId);
 }
 
 function setupYearSelector() {

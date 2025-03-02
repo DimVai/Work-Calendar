@@ -38,19 +38,26 @@ let dayTypes = [
     }
 ];
 
-let propper = date => date.toISOString().split('T')[0];
-
-
-// Σημερινή ημέρας
-const today = new Date();
-Q(`#day-${propper(today)}`).classList.add("today");
-Q(`#day-${propper(today)}`).element.setAttribute("data-tooltip", "Σήμερα");
-
-
 // Χρώμα ημέρών με βάση τον τύπο τους
 dayTypes.forEach((dayType,index) => {
     Q.setCssVariable(`--type-${index}`, dayType.color);
 });
+
+/** Μετατρέπει μια ημερομηνία στη μορφή που χρησιμοποιείται από την Εφαρμογή */
+let propper = date => date.toISOString().split('T')[0];
+
+
+
+// Σημερινή ημέρα
+function showToday(){
+    const today = new Date();
+    if (!Q(`#day-${propper(today)}`)) {return}
+    Q(`#day-${propper(today)}`).classList.add("today");
+    Q(`#day-${propper(today)}`).element.setAttribute("data-tooltip", "Σήμερα");
+}
+showToday();
+
+
 
 
 ////// Επίσημες αργίες στην Ελλάδα
@@ -119,6 +126,7 @@ function showHolidays() {
 showHolidays();
 
 
+
 ////// Ημέρες πληρωμής μισθού στην Ελλάδα
 
 function getPaydays(year) {
@@ -128,7 +136,7 @@ function getPaydays(year) {
     for (let month = 0; month < 12; month++) {
         lastDays.push(year + '-' + (month+1).toString().padStart(2, "0") + '-' + new Date(year, month + 1, 0).getDate());
     }
-    console.log({lastDays});
+    // console.log({lastDays});
 
     //* Βήμα 2: Υπολογισμός των extra μερών πληρωμής
     let extraPaydays = new Map([
@@ -146,7 +154,7 @@ function getPaydays(year) {
     lastDays.forEach((day) => {
         paydays.set(day, "Μισθοδοσία");
     });
-    console.log({paydays});
+    // console.log({paydays});
 
     //* Βήμα 4: Προσαρμογή των paydays σε περίπτωση που συμπίπτουν με αργίες
     // για όλα τα paydays, όσο συμπίπτουν με αργίες ή Σαββατοκύριακο, μείωση κάτα 1 ημέρα μέχρι να μην συμπίπτουν
@@ -177,3 +185,13 @@ function showPaydays() {
 }
 showPaydays();
 
+
+
+///////    Απαραίτητες ενέργειες κατά την αλλαγή ημερολογίου (έτους)
+document.addEventListener("calendarGenerated", function(event) {
+    // console.log(`Calendar for ${event.detail.year} has been generated!`);
+    showToday();
+    showHolidays();
+    showPaydays();
+    showUserDays();
+});
