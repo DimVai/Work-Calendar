@@ -36,18 +36,38 @@
 
 <main>
 
-    <div class="panel">
-        <div class="statistics">
-            <!-- <h4 class="statistics-title">Ετος <span data-variable="Έτος">2025</span></h4> -->
-            <p>Άδειες: <span data-variable="Άδειες">0</span></p>
-            <p>Ασθένειες: <span data-variable="Ασθένειες">0</span></p>
-            <p>Απεργίες: <span data-variable="Απεργίες">0</span></p>
-        </div>
-        <div class="options">
-            <select id="year-select"></select>
-            <!-- <button id="options-btn" class="btn btn-main">Επιλογές</button> -->
+    <div class="panel-container">
+        <div class="panel">
+            <div class="statistics">
+                <!-- <h4 class="statistics-title">Ετος <span data-variable="Έτος">2025</span></h4> -->
+                <p>Άδειες: <span data-variable="Άδειες">0</span></p>
+                <p>Ασθένειες: <span data-variable="Ασθένειες">0</span></p>
+                <p>Απεργίες: <span data-variable="Απεργίες">0</span></p>
+            </div>
+            <div class="options">
+                <select id="year-select"></select>
+                <button id="options-btn" class="btn btn-main">Επιλογές</button>
+            </div>
         </div>
     </div>
+
+    <dialog id="options-modal" class="modal">
+        <h3>Επιλογές</h3>
+        <form method="dialog">
+            <!-- <button class="btn btn-main" type="button">Είσοδος με Google</button> -->
+            <div class="checkbox-div">
+                <input type="checkbox" id="hide-paydays" name="hidePaydays" class="options-auto-save">
+                <label for="hide-paydays">Απόκρυψη αυτόματων επισημάνσεων για την κατηγορία "Μισθοδοσία"</label>
+            </div>
+            <div class="checkbox-div">
+                <input type="checkbox" id="auto-leave" name="autoLeave" class="options-auto-save">
+                <label for="auto-leave">Αυτόματη επιλογή/αφαίρεση της κατηγορίας "Άδεια" όταν επιλέγεται κάποια ημέρα (η οποία δεν έχει ήδη κατηγορία)</label>
+            </div>
+            <button type="submit" class="btn">OK</button>
+        </form>
+        
+    </dialog>
+
 
     <div id="calendar" class="calendar"></div>
 
@@ -65,9 +85,6 @@
             </div>
         </div>
     </div>
-
-
-
 
  
  

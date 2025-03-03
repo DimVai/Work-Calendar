@@ -43,7 +43,6 @@ if (localStorage.getItem("days")) {
     localStorage.setItem("days", JSON.stringify(Calendar.days));
 }
 
-
 function calculateStatistics(year=currentYear) {
     let statistics = {
         total: 0,
@@ -71,28 +70,44 @@ function enableOrDisableNoteField() {
     }
 }
 
-// Κλικ σε κάποια μέρα
+//# Κλικ σε κάποια μέρα
 Q(".day").on("click", function() {
     // console.log(this.id);
-    // this.setAttribute("data-type", 4);
+    //* 1. Εμφάνιση του modal και συμπλήρωση των στοιχείων
     Q("#edit").classList.add("active");
     let dateInGreek = new Date(this.id).toLocaleDateString('el-GR',{dateStyle: 'full'});  // Δουλεύει!
     Q("~edit-date").set(dateInGreek);
     Q("#edit-note").value = this.getAttribute("data-note")??'';
     Q("#edit-select").value = this.getAttribute("data-type")??'0';
+
+    //* 2. Αν είναι ενεργοποιημένη η αυτόματη άδεια
+    if (Options.autoLeave) {       
+        if (Q("#edit-select").value === '0') {      // Αν είναι στην προεπιλογή, κάντο άδεια
+            Q("#edit-select").value = '4';
+            Q("#edit-note").value = '';
+        } else if (Q("#edit-select").value === '4') {   // Αν είναι ήδη άδεια, κάντο προεπιλογή
+            Q("#edit-select").value = '0';
+        }
+        // handleDayChange(), αλλά το this μεταφέρεται (είναι το στοιχείο .day που κλικάραμε)
+        handleDayChange.bind(this)();       
+    }
+
+    //* 3. Ενεργοποίηση/Απενεργοποίηση του πεδίου σημειώσεων
     enableOrDisableNoteField();
 });
 
-// hide edit on click outside
+// click outside the edit offcanvas to hide it
 document.addEventListener('click', function(event) {
     if (Q("#edit") && !event.target.classList.contains("day") && !event.target.closest("#edit")) {
         Q("#edit").classList.remove('active');
     }
 });
 
-// Αλλαγή τιμής στο edit (auto save)
-Q(".edit-auto-save").on("input", function() {
-    
+
+//# Αλλαγές στις ημέρες από το χρήστη (auto save)
+
+function handleDayChange() {
+    // console.log(this);
     let userDay = {
         date: (Q(".day.selected")[0].id).substr(4),
         type: Q("#edit-select").value,
@@ -118,8 +133,9 @@ Q(".edit-auto-save").on("input", function() {
         Calendar.add(userDay);
     }
     enableOrDisableNoteField();
-});
+}
 
+Q(".edit-auto-save").on("input", handleDayChange);      // το this μεταφέρεται στο handleDayChange 
 
 
 

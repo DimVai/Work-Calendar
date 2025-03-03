@@ -149,7 +149,7 @@ showHolidays();
 
 function getPaydays(year) {
 
-    if (!year) {return new Map()}
+    if (!year || Options.hidePaydays ) {return new Map()}
 
     //* Βήμα 1: Τελευταίες μέρες κάθε μήνα σε μορφή ΕΕΕΕ-ΜΜ-ΗΗ
     let lastDays = [];
@@ -220,11 +220,16 @@ function getDefaultDays (year) {
 
 
 ///////    Απαραίτητες ενέργειες κατά την αλλαγή ημερολογίου (έτους)
-document.addEventListener("calendarGenerated", function(event) {
-    // console.log(`Calendar for ${event.detail.year} has been generated!`);
+
+function refreshCalendar() {
     showToday();
     showHolidays();
     showPaydays();
     showUserDays();
     calculateStatistics();
+}
+
+document.addEventListener("calendarGenerated", function(event) {
+    // console.log(`Calendar for ${event.detail.year} has been generated!`);
+    refreshCalendar();
 });
