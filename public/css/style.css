@@ -15,7 +15,11 @@
 header{
     background-color: var(--main-color);
     height: 5rem;
-    h1 {color: white; padding-bottom: 0.2rem;}
+    h1 {
+        font-size: min(2.5rem, 7vw);
+        color: white; 
+        padding-bottom: 0.2rem;
+    }
     .logo img{
         height: 3rem;
     }
@@ -28,11 +32,12 @@ body{
 }
 
 main{
-    padding-bottom: 150px;
+    padding-bottom: 100px;
 }
 
 footer{
     padding-block: 2rem;
+    hr{margin:1rem;}
 }
 
 select, input, textarea{
@@ -49,10 +54,21 @@ select, input, textarea{
         background-color: hsl(0, 0%, 90%);
     }
 }
-#year-select{
-    text-align: center;
-    min-width: 15ch;
+
+.btn{
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
+.btn-main{
+    background-color: hsl(231, 100%, 60%);
+    color: white;
+    &:hover, &:focus{
+        background-color: #0044ff;
+    }
+}
+
 textarea{
     padding: 0.6rem 0.7rem;
 }
@@ -64,7 +80,7 @@ textarea{
 
 /*************   Calendar   *************/
 
-.calendar{
+.calendar {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -127,7 +143,7 @@ textarea{
     background-color: var(--type-weekend, MediumSpringGreen);
     color: black;
 }
-.today{
+.today {
     background-color: var(--today);
     color: white;
     border: 3px solid black;
@@ -168,19 +184,34 @@ textarea{
 }
 
 
-.statistics{
-    margin: 1rem auto;
+.panel{
     max-width: 350px;
+    margin: 1rem auto;
     padding: 1rem;
     background-color: LightSteelBlue ;
-    text-align: left;
     line-height: 1.4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.statistics{
+    text-align: left;
     .statistics-title{
         margin-bottom: 0.5rem;
     }
 }
+.options{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    #year-select{
+        text-align: center;
+        min-width: 15ch;
+        margin: 0;
+    }
+}
 
-.offcanvas {
+.offcanvas{
     position: fixed;
     bottom: -200px; /* Αρχικά κρυμμένο κάτω από την οθόνη */
     left: 0;
@@ -209,13 +240,13 @@ textarea{
         text-align: right;
     } */
 }
-.edit-form > div {
+.edit-form > div{
     /* border: 1px solid #ccc; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-.offcanvas.active {
+.offcanvas.active{
     bottom: 0;
 }

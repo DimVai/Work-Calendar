@@ -18,6 +18,7 @@
     <script defer src="js/calendar.js"></script>
     
     <script defer src="js/Q.js"></script>
+    <script defer src="js/options.js"></script>
     <script defer src="js/days.js"></script>
     <script defer src="js/actions.js"></script>
     
@@ -35,18 +36,20 @@
 
 <main>
 
-    <div class="statistics">
-        <h4 class="statistics-title">Για το έτος <span data-variable="Έτος">2025</span></h4>
-        <p>Άδειες: <span data-variable="Άδειες">0</span></p>
-        <p>Ασθένειες: <span data-variable="Ασθένειες">0</span></p>
-        <p>Απεργίες: <span data-variable="Απεργίες">0</span></p>
+    <div class="panel">
+        <div class="statistics">
+            <!-- <h4 class="statistics-title">Ετος <span data-variable="Έτος">2025</span></h4> -->
+            <p>Άδειες: <span data-variable="Άδειες">0</span></p>
+            <p>Ασθένειες: <span data-variable="Ασθένειες">0</span></p>
+            <p>Απεργίες: <span data-variable="Απεργίες">0</span></p>
+        </div>
+        <div class="options">
+            <select id="year-select"></select>
+            <!-- <button id="options-btn" class="btn btn-main">Επιλογές</button> -->
+        </div>
     </div>
 
     <div id="calendar" class="calendar"></div>
-    <div>
-        <label for="year-select">Επιλογή έτους: </label>
-        <select id="year-select"></select>
-    </div>
 
     <div id="edit" class="offcanvas">
         <h3 data-variable="edit-date"></h3>
@@ -71,6 +74,7 @@
 </main>
 
 <footer>
+    <hr>
     <div class="text-center">&copy; <span id="copy-years"></span> Δημήτρης Βαϊνανίδης All rights Reserved</div>
 </footer>
 
