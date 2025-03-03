@@ -4,25 +4,25 @@ let Calendar = {
     days: [],
     add: function({date, type, note}) {
         this.days.push({date, type, note});
-        localStorage.setItem("days", JSON.stringify(this.days));
         Q(`#day-${date}`).element.setAttribute("data-type", type);
         Q(`#day-${date}`).element.setAttribute("data-note", note);
         this.endAction();
     },
     remove: function(date) {
         this.days = this.days.filter(day => day.date !== date);
-        localStorage.setItem("days", JSON.stringify(this.days));
         Q(`#day-${date}`).element.removeAttribute("data-type");
         Q(`#day-${date}`).element.removeAttribute("data-note");
         this.endAction();
     },
     empty: function() {
         this.days = [];
-        localStorage.setItem("days", JSON.stringify(this.days));
         this.endAction();
     },
     endAction: function() {
+        localStorage.setItem("days", JSON.stringify(this.days));
         calculateStatistics(currentYear);
+        const event = new CustomEvent("calendarUpdated", {detail: {days: this.days}});
+        document.dispatchEvent(event);
         return this.days;
     }
 };
@@ -92,7 +92,7 @@ document.addEventListener('click', function(event) {
 
 // Αλλαγή τιμής στο edit (auto save)
 Q(".edit-auto-save").on("input", function() {
-    enableOrDisableNoteField();
+    
     let userDay = {
         date: (Q(".day.selected")[0].id).substr(4),
         type: Q("#edit-select").value,
@@ -100,11 +100,24 @@ Q(".edit-auto-save").on("input", function() {
     }
     Calendar.remove(userDay.date);   // Διαγραφή παλιάς μέρας
     // console.log(userDay);
-    if (userDay.type === '0') {
+    if (userDay.type === '0') {     // Ο χρήστης επέλεξε "Προεπιλογή"
         Q("#edit-note").value = '';
-        return;
+        // Χρήση του getDefaultDays για συμπλήρωση του data-type και data-note
+        let defaultDays = getDefaultDays(currentYear);
+        // console.log(defaultDays);
+        let defaultDay = defaultDays.find(day => day.date === userDay.date);
+        
+        if (defaultDay) {
+            Q(`#day-${userDay.date}`).element.setAttribute("data-type", defaultDay.type);
+            Q(`#day-${userDay.date}`).element.setAttribute("data-note", defaultDay.note);
+            Q("#edit-select").value = defaultDay.type;
+            Q("#edit-note").value = defaultDay.note;
+            // enableOrDisableNoteField();  // ξανά, διότι άλλαξε το type (το οποίο μπορεί να είναι οτιδήποτε)
+        }
+    } else {    // Ο χρήστης επέλεξε κάτι άλλο εκτός από "Προεπιλογή"
+        Calendar.add(userDay);
     }
-    Calendar.add(userDay);
+    enableOrDisableNoteField();
 });
 
 

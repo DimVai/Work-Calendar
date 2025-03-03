@@ -111,6 +111,7 @@ const movingHolidays = new Map([
 ]);
 
 function getMovingHolidays(year) {
+    if (!year) {return new Map()}
     let easterDate = new Date(`${year}-${easter.get(year)}`);       // Ημερομηνία του Πάσχα
     let movingHolidaysDates = new Map();
     movingHolidays.forEach((holiday, offset) => {
@@ -123,7 +124,8 @@ function getMovingHolidays(year) {
 }
 
 /** Επιστρέφει τις επίσης αργίες στην Ελλάδα στη μορφή ΕΕΕΕ-ΜΜ-ΗΗ */
-let holidays = year => {
+function getHolidays(year) {
+    if (!year) {return new Map()}
     let propperFixedHolidays = new Map();
     fixedholidays.forEach((holiday, date) => {
         propperFixedHolidays.set(propper(new Date(`${year}-${date}`)), holiday);
@@ -134,7 +136,7 @@ let holidays = year => {
 
 // Εμφάνιση αργιών στο ημερολόγιο
 function showHolidays() {
-    holidays(currentYear).forEach((holiday, date) => {
+    getHolidays(currentYear).forEach((holiday, date) => {
         Q(`#day-${date}`).element.setAttribute("data-type", 3);
         Q(`#day-${date}`).element.setAttribute("data-note", holiday);
     });
@@ -146,6 +148,8 @@ showHolidays();
 ////// Ημέρες πληρωμής μισθού στην Ελλάδα
 
 function getPaydays(year) {
+
+    if (!year) {return new Map()}
 
     //* Βήμα 1: Τελευταίες μέρες κάθε μήνα σε μορφή ΕΕΕΕ-ΜΜ-ΗΗ
     let lastDays = [];
@@ -174,7 +178,7 @@ function getPaydays(year) {
 
     //* Βήμα 4: Προσαρμογή των paydays σε περίπτωση που συμπίπτουν με αργίες
     // για όλα τα paydays, όσο συμπίπτουν με αργίες ή Σαββατοκύριακο, μείωση κάτα 1 ημέρα μέχρι να μην συμπίπτουν
-    let holidayDates = [...holidays(year).keys()];
+    let holidayDates = [...getHolidays(year).keys()];
     // console.log({holidayDates});
     paydays.forEach((paydayDescription, date) => {
         // console.log(paydayDescription, date);
@@ -200,6 +204,18 @@ function showPaydays() {
     });
 }
 showPaydays();
+
+/** Union of getHolidays and getPayDays in the format {date, type, note} */
+function getDefaultDays (year) {
+    let defaultDays = [];
+    getHolidays(year).forEach((holiday, date) => {
+        defaultDays.push({date, type: 3, note: holiday});
+    });
+    getPaydays(year).forEach((paydayDescription, date) => {
+        defaultDays.push({date, type: 8, note: paydayDescription});
+    });
+    return defaultDays;
+}
 
 
 
