@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" style="color-scheme:dark;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User days</title>
+    <!-- <script src="/js/Q.js"></script> -->
+    <script src="/js/days.js"></script>
+</head>
+<body>
     <div id="userDays"></div>
-<script>
-let days = localStorage.getItem('days');
-console.log(days);
-let userDays = document.getElementById('userDays');
-let userDaysHTML = '';
-if (days) {
-    days = JSON.parse(days);
-    for (let day of days) {
-        userDaysHTML += `<div>${day.type} - ${day.date} - ${day.note}</div>`;
-    }
-}
-userDays.innerHTML = userDaysHTML;
-</script>
 
 
+
+    <script>
+        let days = localStorage.getItem('days');
+        console.log(days);
+        let userDays = document.getElementById('userDays');
+        let userDaysHTML = '';
+        if (days) {
+            days = JSON.parse(days);
+            days.sort((a, b) => a.date > b.date ? 1 : -1);
+            for (let day of days) {
+                userDaysHTML += `<div>${day.date} - ${dayTypes[day.type].name} - ${day.note}</div>`;
+            }
+        }
+        userDays.innerHTML = userDaysHTML;
+        </script>
+
+
+</body>
 </html>
+
+    
+
