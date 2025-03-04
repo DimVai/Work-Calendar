@@ -14,9 +14,9 @@
 
 header{
     background-color: var(--main-color);
-    height: 5rem;
+    min-height: 5.5rem;
     h1 {
-        font-size: min(2.5rem, 7vw);
+        font-size: clamp(1.5rem, 7vw, 2rem);
         color: white; 
         padding-bottom: 0.2rem;
     }
@@ -202,6 +202,7 @@ h3, .month-title {
     margin: 0;
     width: 100%;
     background-color: LightSteelBlue ;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 .panel{
     max-width: 350px;
