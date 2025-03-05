@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.web.dim_work_calendar.twa",
+        "sha256_cert_fingerprints": ["33:83:31:21:45:9B:A0:7F:3B:04:E0:74:A0:78:20:5F:90:24:2A:5D:B0:3F:59:2A:C1:F8:3D:21:6F:8B:0E:EE","6F:B4:56:1E:A8:45:2B:98:4E:CF:4B:AB:DC:7D:25:26:83:13:13:22:C1:9B:0A:F9:7A:42:24:27:0A:B9:70:33"]
+      }
+    }]
