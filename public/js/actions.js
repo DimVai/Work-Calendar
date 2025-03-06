@@ -27,6 +27,8 @@ let Calendar = {
     }
 };
 
+//# Βήμα 4: Ημέρες χρήστη
+
 function showUserDays() {
     Calendar.days.forEach(day => {
         if (!Q(`#day-${day.date}`)) {return}
@@ -34,7 +36,6 @@ function showUserDays() {
         Q(`#day-${day.date}`).element.setAttribute("data-note", day.note);
     });
 }
-showUserDays();
 
 if (localStorage.getItem("days")) {
     Calendar.days = JSON.parse(localStorage.getItem("days"));
@@ -62,6 +63,10 @@ function calculateStatistics(year=currentYear) {
 }
 calculateStatistics(currentYear);
 
+
+
+//# Κλικ σε κάποια μέρα
+
 function enableOrDisableNoteField() {
     if (Q("#edit-select").value === '0') {
         Q("#edit-note").element.setAttribute("disabled", true);
@@ -70,7 +75,6 @@ function enableOrDisableNoteField() {
     }
 }
 
-//# Κλικ σε κάποια μέρα
 Q(".day").on("click", function() {
     // console.log(this.id);
     //* 1. Εμφάνιση του modal και συμπλήρωση των στοιχείων
@@ -104,8 +108,8 @@ document.addEventListener('click', function(event) {
 });
 
 
-//# Αλλαγές στις ημέρες από το χρήστη (auto save)
 
+//# Αλλαγές στις ημέρες από το χρήστη (auto save)
 function handleDayChange() {
     // console.log(this);
     let userDay = {
@@ -134,12 +138,21 @@ function handleDayChange() {
     }
     enableOrDisableNoteField();
 }
-
 Q(".edit-auto-save").on("input", handleDayChange);      // το this μεταφέρεται στο handleDayChange 
 
 
+//# Σκρολλάρισμα της σελίδας στον τρέχοντα μήνα
+function scrollToCurrentMonth() {
+    if (sessionStorage.getItem("alreadyScrolledToCurrentMonth") || window.innerWidth > 1200) {return}
+    const currentMonth = new Date().getMonth() + 1;
+    const targetElement = document.getElementById(`month-${currentYear}-${currentMonth}`);
+    if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+        sessionStorage.setItem("alreadyScrolledToCurrentMonth","true");
+    }
+}
+scrollToCurrentMonth();
 
 
-
-// Copyright 
+//# Copyright 
 {let b=2025,y=new Date().getFullYear();document.getElementById('copy-years').textContent=(y>b)?`${b}-${y}`:b}

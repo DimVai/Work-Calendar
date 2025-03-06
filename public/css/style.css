@@ -57,26 +57,35 @@ select, input[type="text"], textarea{
 
 dialog{
     max-width: 90%;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
     border-radius: 10px;
+    padding: 1.5rem 1rem;
     &::backdrop {
         background-color: rgba(0, 0, 0, 0.7);
     }   
 }
 
 .btn{
+    --btn-color: lightgray;
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-.btn-main{
-    background-color: hsl(231, 100%, 60%);
-    color: white;
+    background-color: var(--btn-color);
     &:hover, &:focus{
-        background-color: #0044ff;
+        background-color: hsl( from var(--btn-color) h s calc(l - 10) );
     }
 }
+.btn-main{
+    --btn-color: hsl(231, 100%, 60%);
+    color: white;
+}
+.btn-ok{
+    margin-top: 0.4rem;
+    padding: 0.8rem;
+    /* color: white; */
+}
+
 
 textarea{
     padding: 0.6rem 0.7rem;
@@ -100,6 +109,8 @@ textarea{
     padding: 1.2rem;
     border: 2px solid DarkRed;
     border-radius: 1.2rem;
+    /* Όταν scrollάρεις σε αυτό μέσω JavaScript, πρόσθεσε και 200px λόγω του panel (magin number)*/
+    scroll-margin-top: 200px; 
 }
 h3, .month-title {
     font-size: 1.2em;

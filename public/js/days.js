@@ -62,7 +62,7 @@ let propper = date => {
 
 
 
-// Σημερινή ημέρα
+//# Βήμα 1: Σημερινή ημέρα
 function showToday(){
     const today = new Date();
     // change today for testing purposes
@@ -75,8 +75,7 @@ showToday();
 
 
 
-
-////// Επίσημες αργίες στην Ελλάδα
+//# Βήμα 2: Επίσημες αργίες στην Ελλάδα
 
 const fixedholidays = new Map([
     ["01-01", "Πρωτοχρονιά"],
@@ -144,8 +143,7 @@ function showHolidays() {
 showHolidays();
 
 
-
-////// Ημέρες πληρωμής μισθού στην Ελλάδα
+//# Βήμα 3: Μισθοδοσία μισθωτών
 
 function getPaydays(year) {
 

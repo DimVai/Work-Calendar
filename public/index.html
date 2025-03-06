@@ -37,7 +37,7 @@
 <main>
 
     <div class="panel-container">
-        <div class="panel">
+        <div id="panel" class="panel">
             <div class="statistics">
                 <!-- <h4 class="statistics-title">Ετος <span data-variable="Έτος">2025</span></h4> -->
                 <p>Άδειες: <span data-variable="Άδειες">0</span></p>
@@ -52,7 +52,7 @@
     </div>
 
     <dialog id="options-modal" class="modal">
-        <h3>Επιλογές</h3>
+        <h3 class="">Επιλογές</h3>
         <form method="dialog">
             <!-- <button class="btn btn-main" type="button">Είσοδος με Google</button> -->
             <div class="checkbox-div">
@@ -63,7 +63,7 @@
                 <input type="checkbox" id="auto-leave" name="autoLeave" class="options-auto-save">
                 <label for="auto-leave">Αυτόματη επιλογή/αφαίρεση της κατηγορίας "Άδεια" όταν επιλέγεται κάποια ημέρα (η οποία δεν έχει ήδη κατηγορία)</label>
             </div>
-            <button type="submit" class="btn">OK</button>
+            <button type="submit" class="btn btn-ok">OK</button>
         </form>
         
     </dialog>

@@ -16,7 +16,8 @@ function generateCalendar(year) {
         monthDiv.classList.add("month");
         
         const title = document.createElement("h3");
-        title.classList.add("month-title");
+        monthDiv.classList.add("month");
+        monthDiv.id = `month-${year}-${index + 1}`;
         title.textContent = `${month} ${year}`;
         monthDiv.appendChild(title);
         
