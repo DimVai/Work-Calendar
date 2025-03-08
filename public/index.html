@@ -14,13 +14,19 @@
 
 	<link rel="stylesheet" href="css/base.css">
 	<link rel="stylesheet" href="css/style.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap-utilities.min.css" rel="stylesheet" crossorigin="anonymous"> -->
+
     <script defer src="js/calendar.js"></script>
-    
     <script defer src="js/Q.js"></script>
     <script defer src="js/options.js"></script>
     <script defer src="js/days.js"></script>
     <script defer src="js/actions.js"></script>
+    
+    <!-- <script defer src="/__/firebase/11.4.0/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/11.4.0/firebase-app-check-compat.js"></script>
+    <script defer src="/__/firebase/11.4.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/11.4.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <script defer src="js/firebase.js"></script> -->
     
 </head>
 <body>
@@ -53,6 +59,20 @@
 
     <dialog id="options-modal" class="modal">
         <h3 class="">Επιλογές</h3>
+        <div style="display:none">
+            <hr>
+            <div class="if-guest">
+                <button class="btn btn-google" id="google-login">
+                    <img src="resources/google.png" alt="Google" height="20px">
+                    <div>Σύνδεση μέσω Google</div>
+                </button>
+            </div>
+            <div class="if-user">
+                <p>Συνδεδεμένος ως: <span data-variable="email"></span></p>
+                <button class="btn btn-main" id="logout-btn">Αποσύνδεση</button>
+            </div>
+            <hr>
+        </div>
         <form method="dialog">
             <!-- <button class="btn btn-main" type="button">Είσοδος με Google</button> -->
             <div class="checkbox-div">
@@ -63,7 +83,11 @@
                 <input type="checkbox" id="auto-leave" name="autoLeave" class="options-auto-save">
                 <label for="auto-leave">Αυτόματη επιλογή/αφαίρεση της κατηγορίας "Άδεια" όταν επιλέγεται κάποια ημέρα (η οποία δεν έχει ήδη κατηγορία)</label>
             </div>
-            <button type="submit" class="btn btn-ok">OK</button>
+            <div class="input-div">
+                <label for="custom-type-name">Όνομα ειδικής κατηγορίας</label>
+                <input type="text" id="custom-type-name" name="customTypeName" class="options-auto-save" maxlength="15" placeholder="Γιορτή">
+            </div>
+            <button type="submit" class="btn btn-ok" id="options-save">OK</button>
         </form>
         
     </dialog>

@@ -7,6 +7,8 @@
     --today: blue;
     --type-weekend: hsl(195, 53%, 85%);
     --background-color: lavender;
+    --user-display: none;
+    --guest-display: block;
 }
 
 
@@ -37,7 +39,6 @@ main{
 
 footer{
     padding-block: 2rem;
-    hr{margin:1rem;}
 }
 
 select, input[type="text"], textarea{
@@ -64,6 +65,8 @@ dialog{
         background-color: rgba(0, 0, 0, 0.7);
     }   
 }
+
+hr{ margin-block: 1.2rem }
 
 .btn{
     --btn-color: lightgray;
@@ -205,6 +208,29 @@ h3, .month-title {
 }
 
 
+
+/*************   Options   *************/
+
+.if-user{
+    display: var(--user-display, none);
+}
+.if-guest{
+    display: var(--guest-display, block);
+}
+
+.btn-google{
+    --btn-color: hsl(216, 85%, 35%);
+    color: white;
+    font-weight: bold;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    margin-inline: auto;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+}
+
 .panel-container{
     position: sticky;
     top: 0;
@@ -240,6 +266,8 @@ h3, .month-title {
         margin: 0;
     }
 }
+
+/*************   Offcanvas   *************/
 
 .offcanvas{
     position: fixed;
@@ -292,5 +320,15 @@ h3, .month-title {
         gap: 0.5rem;
         align-items: center;
         text-align: left;
+    }
+    .input-div{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        /* flex-direction: column; */
+        /* flex-direction: row; */
+        gap: 0.5rem;
+        align-items: center;
+        /* text-align: left; */
+        label{text-align:right}
     }
 }

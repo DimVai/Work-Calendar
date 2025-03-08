@@ -16,7 +16,7 @@ let dayTypes = [
         name: "Αργία",
         color: "DeepSkyBlue",
     },
-    {   // 4
+    {   // 4, Άδεια
         name: "Άδεια",
         color: "LimeGreen",
     },
@@ -28,8 +28,8 @@ let dayTypes = [
         name: "Ασθένεια",
         color: "SandyBrown",
     },
-    {   // 7
-        name: "Γιορτή",
+    {   // 7, custom
+        name: Options.customTypeName,       // Options gets initialized first
         color: "Purple",
     },
     {   // 8
@@ -48,11 +48,13 @@ dayTypes.forEach((dayType,index) => {
     if (dayType.color) {Q.setCssVariable(`--type-${index}`, dayType.color)};
 });
 
-function showEditOptions() {
+function fillEditOptions() {
+    let editSelect = Q("#edit-select").element;
+    editSelect.innerHTML = ""; // Άδειασμα των options
     let dayTypeSelectOptionsHTML = dayTypes.map((dayType, index) => `<option value="${index}">${dayType.name}</option>`).join("");
-    Q("#edit-select").element.innerHTML = dayTypeSelectOptionsHTML;
+    editSelect.innerHTML = dayTypeSelectOptionsHTML;
 }
-showEditOptions();
+fillEditOptions();
 
 /** Μετατρέπει μια ημερομηνία στη μορφή που χρησιμοποιείται από την Εφαρμογή */
 let propper = date => {
