@@ -18,12 +18,6 @@ Q("#options-btn").on("click", function() {
     Q("#options-modal").element.showModal();
 });
 
-// Click outside the modal to close it. Περίπου σωστό...
-document.addEventListener("click", function(e) {
-    if (e.target.id === "options-modal") {
-        Q("#options-modal").element.close();
-    }
-});
 
 // Options behavior in the modal
 Q("#hide-paydays").checked = Options.hidePaydays;

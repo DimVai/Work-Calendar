@@ -147,11 +147,12 @@ function scrollToCurrentMonth() {
     const currentMonth = new Date().getMonth() + 1;
     const targetElement = document.getElementById(`month-${currentYear}-${currentMonth}`);
     if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth" });
+        targetElement.scrollIntoView({ behavior: "smooth", /*block: "center"*/ });
         sessionStorage.setItem("alreadyScrolledToCurrentMonth","true");
     }
 }
 scrollToCurrentMonth();
+// setTimeout(scrollToCurrentMonth,100);
 
 
 //# Copyright 
