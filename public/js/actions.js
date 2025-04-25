@@ -1,7 +1,9 @@
-
 /** The user's Calendar */
 let Calendar = {
     days: [],
+    lastUpdate: localStorage.getItem("calendarUpdate") 
+        ? new Date(localStorage.getItem("calendarUpdate")) 
+        : new Date(),
     add: function({date, type, note}) {
         this.days.push({date, type, note});
         Q(`#day-${date}`).element.setAttribute("data-type", type);
@@ -21,15 +23,21 @@ let Calendar = {
     endAction: function() {
         localStorage.setItem("days", JSON.stringify(this.days));
         calculateStatistics(currentYear);
+        this.lastUpdate = new Date();
+        localStorage.setItem("calendarUpdate", new Date().toISOString());
         const event = new CustomEvent("calendarUpdated", {detail: {days: this.days}});
-        document.dispatchEvent(event);
+        document.dispatchEvent(event);      // event on document or on window
         return this.days;
+    },
+    get size() {
+        return this.days.length;
     }
 };
 
 //# Βήμα 4: Ημέρες χρήστη
 
-function showUserDays() {
+// Σημείωση: Το showUserDays δεν αποχρωματίζει τις "παλιές" ημέρες αν πχ το Calendar φορτώθηκε από τη βάση. Να γίνει χρήση του refreshCalendar() για αυτό.
+function showUserDays() {       
     Calendar.days.forEach(day => {
         if (!Q(`#day-${day.date}`)) {return}
         Q(`#day-${day.date}`).element.setAttribute("data-type", day.type);
