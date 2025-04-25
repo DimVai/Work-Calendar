@@ -9,10 +9,12 @@ let AppUser = {
 };
 
 /* The web app's Firebase configuration */
+
 /*
 const firebaseConfig = {
     apiKey: "AIzaSyD0_ALHems5yDoDZ2SEL8iI0JN8qXjrg2U",
-    authDomain: window.location.hostname,
+    // authDomain: "window.location.hostname",
+    authDomain: "dim-work-calendar.web.app",
     projectId: "dim-work-calendar",
     storageBucket: "dim-work-calendar.firebasestorage.app",
     messagingSenderId: "547684551323",
@@ -20,7 +22,6 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 */
-
 
 //#1 Google authentication
 
@@ -35,6 +36,7 @@ function signInWithGoogle() {
         console.debug(error);
     });
 }
+
 
 Q(".btn-google").on('click', signInWithGoogle);
 Q(".btn-logout").on('click', function() { firebase.auth().signOut() });
