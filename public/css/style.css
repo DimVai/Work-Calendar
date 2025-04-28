@@ -266,6 +266,19 @@ h3, .month-title {
     }
 }
 
+.why{
+    font-size: small;
+    font-style: italic;
+    text-decoration: underline;
+}
+.because{
+    font-size: small;
+    font-style: italic;
+}
+.unseparated{
+    text-wrap: nowrap;
+}
+
 /*************   Offcanvas   *************/
 
 .offcanvas{

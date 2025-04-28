@@ -78,11 +78,11 @@ async function loadCalendarFromDB() {
             let CalendarFromDB = doc.data();
             console.debug("Calendar loaded from database");
             // let dbDate = CalendarFromDB.lastUpdade.toDate();
-            if (CalendarFromDB.days?.length >=3 ) {
+            if (CalendarFromDB.days?.length>=3 ?? CalendarFromDB.days?.length>=Calendar.size ) {
                 Calendar.lastUpdate = CalendarFromDB.lastUpdade.toDate();
                 Calendar.days = CalendarFromDB.days;
                 localStorage.setItem("days", JSON.stringify(CalendarFromDB.days));
-                Options = CalendarFromDB.options ?? Options; // Αν δεν υπάρχουν επιλογές, χρησιμοποίησε τις default
+                Options = CalendarFromDB.options ?? Options;
                 refreshOptions(Options); // Ενημέρωση στο UI και στο dayTypes
                 generateCalendar(currentYear);      // (Με το refreshCalendar() δεν θα αποχρωματιστούν οι "παλιές" μέρες. Για αυτό generateCalendar)
                 return CalendarFromDB;
