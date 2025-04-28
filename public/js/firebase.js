@@ -73,7 +73,7 @@ const db = firebase.firestore();
 async function loadCalendarFromDB() {
     if (AppUser.id==0) { return }
     const calendarRef = db.collection('Calendars').doc(AppUser.id);
-    calendarRef.get().then((doc) => {
+    let CalendarData = await calendarRef.get().then((doc) => {
         if (doc.exists) {
             let CalendarFromDB = doc.data();
             console.debug("Calendar loaded from database");
@@ -81,6 +81,9 @@ async function loadCalendarFromDB() {
             if (CalendarFromDB.days?.length >=3 ) {
                 Calendar.lastUpdate = CalendarFromDB.lastUpdade.toDate();
                 Calendar.days = CalendarFromDB.days;
+                localStorage.setItem("days", JSON.stringify(CalendarFromDB.days));
+                Options = CalendarFromDB.options ?? Options; // Αν δεν υπάρχουν επιλογές, χρησιμοποίησε τις default
+                refreshOptions(Options); // Ενημέρωση στο UI και στο dayTypes
                 generateCalendar(currentYear);      // (Με το refreshCalendar() δεν θα αποχρωματιστούν οι "παλιές" μέρες. Για αυτό generateCalendar)
                 return CalendarFromDB;
             } else {
@@ -97,6 +100,7 @@ async function loadCalendarFromDB() {
         console.debug("Error getting document:", error);
         return null;
     });
+    return CalendarData;
 }
 
 
@@ -116,6 +120,7 @@ async function saveToDB() {
         days: Calendar.days,
         // lastUpdade: firebase.firestore.FieldValue.serverTimestamp(),
         lastUpdade: Calendar.lastUpdate,
+        options: Options,
     };
     await calendarRef.set(calendarData, { merge: false }).then(() => {
         console.debug("Calendar saved to database");

@@ -32,5 +32,16 @@ Q(".options-auto-save").on("change", function() {
 Q("#options-save").on("click", function(){
     Options.customTypeName = Options.customTypeName?.length>0 ? Options.customTypeName : "Γιορτή";
     dayTypes[7].name = Options.customTypeName;
-    fillEditOptions();
+    fillEditOptions();  // Update the select dropdown options
+    saveToDB();
 });
+
+function refreshOptions(options) {  // used when loading from DB
+    Q("#hide-paydays").checked = options.hidePaydays;
+    Q("#auto-leave").checked = options.autoLeave;
+    Q("#custom-type-name").value = options.customTypeName;
+    Q("#options-modal").element.close();
+    Options.customTypeName = options.customTypeName || "Γιορτή";
+    dayTypes[7].name = options.customTypeName;
+    fillEditOptions();
+}
