@@ -6,11 +6,12 @@ let dayTypes = [
     },
     {   // 1
         name: "Εργάσιμη",
-        color: "Snow",
+        color: "GhostWhite",
     },
     {   // 2
         name: "Ρεπό",
-        color: "hsl(195, 53%, 75%)",
+        color: "LightBlue",
+        // color: "hsl(195, 53%, 83%)",
     },
     {   // 3
         name: "Αργία",
@@ -26,16 +27,19 @@ let dayTypes = [
     },
     {   // 6
         name: "Ασθένεια",
-        color: "SandyBrown",
+        color: "hsl(28, 81%, 64%)",
+        // color: "SandyBrown",
     },
     {   // 7, custom
         name: Options.customTypeName,       // Options gets initialized first
-        color: "Purple",
+        color: "DarkMagenta",   //  Purple
     },
     {   // 8
         name: "Μισθοδοσία",
+        // color: "Plum",
         // color: "Violet",
-        color: "hsl(270, 100%, 86%)",
+        color: "hsl(276, 100%, 85%)",
+        // color: "hsl(270, 100%, 86%)",
     },
     {   // 9
         name: "Σημείωση",

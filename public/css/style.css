@@ -2,10 +2,10 @@
 :root {
     --main-color: #0026f9;
     /* --type-default: hsl(0, 0%, 94%); */
-    --white-background: Snow;
-    --weekday-label: Gainsboro;
+    --white-background: GhostWhite;     /* Snow; */
+    --weekday-label: hsl(215, 40%, 83%);
     --today: blue;
-    --type-weekend: hsl(195, 53%, 85%);
+    --type-weekend: hsl(195, 60%, 85%);
     --background-color: lavender;
     --user-display: none;
     --guest-display: block;
@@ -148,11 +148,9 @@ h3, .month-title {
     cursor: default;
 }
 .day:hover {
-    background: #dcdcdc;
+    background: hsl(0, 0%, 83%);
 }
 .day.selected, .day.selected:hover {
-    /* background: black; */
-    /* color: white; */
     border: 3px solid black;
 }
 
@@ -237,7 +235,7 @@ h3, .month-title {
 
     margin: 0;
     width: 100%;
-    background-color: LightSteelBlue ;
+    background-color: hsl(214, 64%, 83%) ;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 .panel{
