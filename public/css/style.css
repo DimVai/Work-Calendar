@@ -277,7 +277,7 @@ h3, .month-title {
     text-wrap: nowrap;
 }
 .privacy-link{
-    font-weight: lighter;
+    font-weight: normal;
 }
 
 /*************   Offcanvas   *************/
