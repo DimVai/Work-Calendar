@@ -10,6 +10,9 @@ let AppUser = {
 
 /* The web app's Firebase configuration */
 
+const db = firebase.firestore();
+db.enablePersistence();     // Πριν το auth().onAuthStateChanged ώστε να το προλάβουμε!
+
 /*
 const firebaseConfig = {
     apiKey: "AIzaSyD0_ALHems5yDoDZ2SEL8iI0JN8qXjrg2U",
@@ -67,8 +70,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
 //#2 Φόρτωση δεδομένων από βάση δεδομένων
-
-const db = firebase.firestore();
 
 async function loadCalendarFromDB() {
     if (AppUser.id==0) { return }
