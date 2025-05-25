@@ -2,52 +2,62 @@
 let dayTypes = [
     {   // 0
         name: "Προεπιλογή",
+        order: 0,
         color: null,
     },
     {   // 1
         name: "Εργάσιμη",
+        order: 1,
         color: "GhostWhite",
     },
     {   // 2
         name: "Ρεπό",
+        order: 2,
         color: "LightBlue",
         // color: "hsl(195, 53%, 83%)",
     },
     {   // 3
         name: "Αργία",
+        order: 3,
         color: "DeepSkyBlue",
     },
     {   // 4, Άδεια
         name: "Άδεια",
+        order: 4,
         color: "LimeGreen",
     },
     {   // 5
         name: "Απεργία",
+        order: 5,
         color: "Red",
     },
     {   // 6
         name: "Ασθένεια",
+        order: 6,
         color: "hsl(28, 81%, 64%)",
         // color: "SandyBrown",
     },
     {   // 7, custom
         name: Options.customTypeName,       // Options gets initialized first
-        color: "DarkMagenta",   //  Purple
+        order: 7,
+        color: "DarkMagenta",
+        // color: "Purple",
     },
     {   // 8
         name: "Μισθοδοσία",
-        // color: "Plum",
+        order: 8,
         // color: "Violet",
         color: "hsl(276, 100%, 85%)",
         // color: "hsl(270, 100%, 86%)",
     },
     {   // 9
         name: "Σημείωση",
+        order: 9,
         color: "Gold",
     }
 ];
 
-// Χρώμα ημέρών με βάση τον τύπο τους
+// Χρώμα ημέρων με βάση τον τύπο τους
 dayTypes.forEach((dayType,index) => {
     if (dayType.color) {Q.setCssVariable(`--type-${index}`, dayType.color)};
 });
@@ -55,7 +65,13 @@ dayTypes.forEach((dayType,index) => {
 function fillEditOptions() {
     let editSelect = Q("#edit-select").element;
     editSelect.innerHTML = ""; // Άδειασμα των options
-    let dayTypeSelectOptionsHTML = dayTypes.map((dayType, index) => `<option value="${index}">${dayType.name}</option>`).join("");
+    // Sort dayTypes by their 'order' property before mapping to options
+    let sortedDayTypes = dayTypes
+        .map((dt, idx) => ({...dt, _index: idx}))
+        .sort((a, b) => a.order - b.order);
+    let dayTypeSelectOptionsHTML = sortedDayTypes
+        .map(dayType => `<option value="${dayType._index}">${dayType.name}</option>`)
+        .join("");
     editSelect.innerHTML = dayTypeSelectOptionsHTML;
 }
 fillEditOptions();
