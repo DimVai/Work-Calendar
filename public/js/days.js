@@ -83,6 +83,12 @@ let propper = date => {
 };
 
 
+/** Περιγραφές συγκεκριμένων ημερών  */
+let dayDescriptions = {
+    today: "(Σήμερα)",
+    8: "Μισθοδοσία",
+};
+
 
 //# Βήμα 1: Σημερινή ημέρα
 function showToday(){
@@ -91,7 +97,7 @@ function showToday(){
     // today.setDate(today.getDate() + 2);
     if (!Q(`#day-${propper(today)}`)) {return}
     Q(`#day-${propper(today)}`).classList.add("today");
-    Q(`#day-${propper(today)}`).element.setAttribute("data-note", "Σήμερα");
+    Q(`#day-${propper(today)}`).element.setAttribute("data-note", dayDescriptions["today"]);
 }
 showToday();
 
@@ -165,6 +171,7 @@ function showHolidays() {
 showHolidays();
 
 
+
 //# Βήμα 3: Μισθοδοσία μισθωτών
 
 function getPaydays(year) {
@@ -192,7 +199,7 @@ function getPaydays(year) {
     //* Βήμα 3: Συνδυασμός των extra μερών πληρωμής με τις τελευταίες μέρες του μήνα
     let paydays = new Map([...extraPaydays]);
     lastDays.forEach((day) => {
-        paydays.set(day, "Μισθοδοσία");
+        paydays.set(day, dayDescriptions[8]);
     });
     // console.log({paydays});
 

@@ -119,19 +119,19 @@ document.addEventListener('click', function(event) {
 
 //# Αλλαγές στις ημέρες από το χρήστη (auto save)
 function handleDayChange() {
-    // console.log(this);
+    
     let userDay = {
         date: (Q(".day.selected")[0].id).substr(4),
         type: Q("#edit-select").value,
         note: Q("#edit-note").value,
     }
     Calendar.remove(userDay.date);   // Διαγραφή παλιάς μέρας
-    // console.log(userDay);
+    
     if (userDay.type === '0') {     // Ο χρήστης επέλεξε "Προεπιλογή"
         Q("#edit-note").value = '';
+
         // Χρήση του getDefaultDays για συμπλήρωση του data-type και data-note
         let defaultDays = getDefaultDays(currentYear);
-        // console.log(defaultDays);
         let defaultDay = defaultDays.find(day => day.date === userDay.date);
         
         if (defaultDay) {
@@ -139,14 +139,13 @@ function handleDayChange() {
             Q(`#day-${userDay.date}`).element.setAttribute("data-note", defaultDay.note);
             Q("#edit-select").value = defaultDay.type;
             Q("#edit-note").value = defaultDay.note;
-            // enableOrDisableNoteField();  // ξανά, διότι άλλαξε το type (το οποίο μπορεί να είναι οτιδήποτε)
         }
     } else {    // Ο χρήστης επέλεξε κάτι άλλο εκτός από "Προεπιλογή"
         Calendar.add(userDay);
     }
     enableOrDisableNoteField();
 }
-Q(".edit-auto-save").on("input", handleDayChange);      // το this μεταφέρεται στο handleDayChange 
+Q(".edit-auto-save").on("input", handleDayChange);      // (το this μεταφέρεται στο handleDayChange) 
 
 
 //# Σκρολλάρισμα της σελίδας στον τρέχοντα μήνα

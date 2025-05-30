@@ -138,10 +138,10 @@ document.addEventListener("calendarUpdated", (e) => {
   dataSavedΤοDB = false;
   debounceTimeout = setTimeout(() => {
     saveToDB();
-  }, 2000); // εκτελείται μόνο αν περάσει κάποιος χρόνος χωρίς νέο event
+  }, 1500); // εκτελείται μόνο αν περάσει κάποιος χρόνος χωρίς νέο event
 });
 
 // Σε περίπτωση που ο χρήστης κλείσει βιαστικά το παράθυρο και δεν προλάβει να αποθηκευτεί το Calendar στη βάση
-window.addEventListener("beforeunload", (e) => {
-    if (!dataSavedΤοDB) { saveToDB(); }
+window.addEventListener("beforeunload", async (e) => {
+    if (!dataSavedΤοDB) { await saveToDB(); }
 });
