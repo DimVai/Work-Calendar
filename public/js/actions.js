@@ -141,6 +141,12 @@ function handleDayChange() {
             Q("#edit-note").value = defaultDay.note;
         }
     } else {    // Ο χρήστης επέλεξε κάτι άλλο εκτός από "Προεπιλογή"
+        if (userDay.note == dayDescriptions.today){  // Αν η σημείωση είναι "Σήμερα", τότε την αφαιρούμε
+            Q("#edit-note").value = userDay.note = '';  
+        } else if (userDay.note == dayDescriptions[8] && userDay.type != '8') {  // Αν η σημείωση είναι "Μισθοδοσία" αλλά δεν επιλέχθηκε Μισθοδοσία
+            Q("#edit-note").value = userDay.note = '';  
+        }
+        console.log(userDay);
         Calendar.add(userDay);
     }
     enableOrDisableNoteField();
