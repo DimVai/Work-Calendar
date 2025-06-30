@@ -146,7 +146,7 @@ function handleDayChange() {
         } else if (userDay.note == dayDescriptions[8] && userDay.type != '8') {  // Αν η σημείωση είναι "Μισθοδοσία" αλλά δεν επιλέχθηκε Μισθοδοσία
             Q("#edit-note").value = userDay.note = '';  
         }
-        console.log(userDay);
+        console.debug(userDay);
         Calendar.add(userDay);
     }
     enableOrDisableNoteField();

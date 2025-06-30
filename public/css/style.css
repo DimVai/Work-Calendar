@@ -14,6 +14,10 @@
 
 /*************   General   *************/
 
+* {
+    box-sizing: border-box;
+}
+
 header{
     background-color: var(--main-color);
     min-height: 5.5rem;
@@ -89,13 +93,6 @@ hr{ margin-block: 1.2rem }
 }
 
 
-textarea{
-    padding: 0.6rem 0.7rem;
-}
-/* select{
-    cursor: pointer;
-    text-align: center;
-} */
 
 
 /*************   Calendar   *************/
@@ -297,10 +294,11 @@ h3, .month-title {
     h3{
         margin: 0.4rem 0 1rem 0;
     }
-    #edit-note{
-        field-sizing: content;
-        /* max-width: 35ch; */
-    }
+}
+#edit select, #edit textarea{
+    width: 22ch;
+    field-sizing: content;
+    min-height: 2.3rem;
 }
 .edit-form{
     /* border: 1px solid #ccc; */
