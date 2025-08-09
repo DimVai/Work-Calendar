@@ -6,14 +6,14 @@ let Calendar = {
         : new Date(),
     add: function({date, type, note}) {
         this.days.push({date, type, note});
-        Q(`#day-${date}`).element.setAttribute("data-type", type);
-        Q(`#day-${date}`).element.setAttribute("data-note", note);
+        Q(`#day-${date}`).setAttribute("data-type", type);
+        Q(`#day-${date}`).setAttribute("data-note", note);
         this.endAction();
     },
     remove: function(date) {
         this.days = this.days.filter(day => day.date !== date);
-        Q(`#day-${date}`).element.removeAttribute("data-type");
-        Q(`#day-${date}`).element.removeAttribute("data-note");
+        Q(`#day-${date}`).removeAttribute("data-type");
+        Q(`#day-${date}`).removeAttribute("data-note");
         this.endAction();
     },
     empty: function() {
@@ -40,8 +40,8 @@ let Calendar = {
 function showUserDays() {       
     Calendar.days.forEach(day => {
         if (!Q(`#day-${day.date}`)) {return}
-        Q(`#day-${day.date}`).element.setAttribute("data-type", day.type);
-        Q(`#day-${day.date}`).element.setAttribute("data-note", day.note);
+        Q(`#day-${day.date}`).setAttribute("data-type", day.type);
+        Q(`#day-${day.date}`).setAttribute("data-note", day.note);
     });
 }
 
@@ -77,9 +77,9 @@ calculateStatistics(currentYear);
 
 function enableOrDisableNoteField() {
     if (Q("#edit-select").value === '0') {
-        Q("#edit-note").element.setAttribute("disabled", true);
+        Q("#edit-note").setAttribute("disabled", true);
     } else {
-        Q("#edit-note").element.removeAttribute("disabled");
+        Q("#edit-note").removeAttribute("disabled");
     }
 }
 
@@ -135,8 +135,8 @@ function handleDayChange() {
         let defaultDay = defaultDays.find(day => day.date === userDay.date);
         
         if (defaultDay) {
-            Q(`#day-${userDay.date}`).element.setAttribute("data-type", defaultDay.type);
-            Q(`#day-${userDay.date}`).element.setAttribute("data-note", defaultDay.note);
+            Q(`#day-${userDay.date}`).setAttribute("data-type", defaultDay.type);
+            Q(`#day-${userDay.date}`).setAttribute("data-note", defaultDay.note);
             Q("#edit-select").value = defaultDay.type;
             Q("#edit-note").value = defaultDay.note;
         }

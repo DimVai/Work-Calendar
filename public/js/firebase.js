@@ -110,6 +110,9 @@ async function loadCalendarFromDB() {
 
 //#3 Αποθήκευση σε βάση δεδομένων
 
+// Μελλοντικά ίσως φτιαχτεί πρόσθετο, πχ await lazySave(ref, data, options) 
+// δηλαδή πχ await lazySave(db.collection('Calendars').doc(AppUser.id), calendarData, {merge: false})
+
 let debounceTimeout = null;
 let dataSavedΤοDB = true;
 
@@ -141,7 +144,7 @@ document.addEventListener("calendarUpdated", (e) => {
   }, 1500); // εκτελείται μόνο αν περάσει κάποιος χρόνος χωρίς νέο event
 });
 
-// Σε περίπτωση που ο χρήστης κλείσει βιαστικά το παράθυρο και δεν προλάβει να αποθηκευτεί το Calendar στη βάση
+// Σε περίπτωση που ο χρήστης κλείσει βιαστικά το παράθυρο και δεν προλάβει να αποθηκευτεί το Calendar στη βάση (αλλά δεν λειτουργεί λόγω await)
 window.addEventListener("beforeunload", async (e) => {
     if (!dataSavedΤοDB) { await saveToDB(); }
 });

@@ -15,7 +15,7 @@ if (localStorage.getItem("options")) {
 
 // Show options modal
 Q("#options-btn").on("click", function() {
-    Q("#options-modal").element.showModal();
+    Q("#options-modal").showModal();
 });
 
 
@@ -40,7 +40,7 @@ function refreshOptions(options) {  // used when loading from DB
     Q("#hide-paydays").checked = options.hidePaydays;
     Q("#auto-leave").checked = options.autoLeave;
     Q("#custom-type-name").value = options.customTypeName;
-    Q("#options-modal").element.close();
+    Q("#options-modal").close();
     Options.customTypeName = options.customTypeName || "Γιορτή";
     dayTypes[7].name = options.customTypeName;
     fillEditOptions();

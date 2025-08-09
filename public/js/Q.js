@@ -1,4 +1,3 @@
-
 /**
  * @file Q.js
  * @author Dimitris Vainanidis
@@ -19,7 +18,12 @@ const singleDOMObjectHandler = {
             return target
         }
         else if (prop in target) {
-            return target[prop];
+            const value = target[prop];
+            // For methods to work, bind it to the target to preserve 'this' context
+            if (typeof value === 'function') {
+                return value.bind(target);
+            }
+            return value;
         } else if (prop === 'on') {
             return function(event, callback, options) {
                 target.addEventListener(event, callback, options);

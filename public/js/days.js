@@ -63,7 +63,7 @@ dayTypes.forEach((dayType,index) => {
 });
 
 function fillEditOptions() {
-    let editSelect = Q("#edit-select").element;
+    let editSelect = Q("#edit-select");
     editSelect.innerHTML = ""; // Άδειασμα των options
     // Sort dayTypes by their 'order' property before mapping to options
     let sortedDayTypes = dayTypes
@@ -97,7 +97,7 @@ function showToday(){
     // today.setDate(today.getDate() + 2);
     if (!Q(`#day-${propper(today)}`)) {return}
     Q(`#day-${propper(today)}`).classList.add("today");
-    Q(`#day-${propper(today)}`).element.setAttribute("data-note", dayDescriptions["today"]);
+    Q(`#day-${propper(today)}`).setAttribute("data-note", dayDescriptions["today"]);
 }
 showToday();
 
@@ -164,8 +164,8 @@ function getHolidays(year) {
 // Εμφάνιση αργιών στο ημερολόγιο
 function showHolidays() {
     getHolidays(currentYear).forEach((holiday, date) => {
-        Q(`#day-${date}`).element.setAttribute("data-type", 3);
-        Q(`#day-${date}`).element.setAttribute("data-note", holiday);
+        Q(`#day-${date}`).setAttribute("data-type", 3);
+        Q(`#day-${date}`).setAttribute("data-note", holiday);
     });
 }
 showHolidays();
@@ -226,8 +226,8 @@ function getPaydays(year) {
 // Εμφάνιση ημερών πληρωμής στο ημερολόγιο
 function showPaydays() {
     getPaydays(currentYear).forEach((paydayDescription, date) => {
-        Q(`#day-${date}`).element.setAttribute("data-type", 8);
-        Q(`#day-${date}`).element.setAttribute("data-note", paydayDescription);
+        Q(`#day-${date}`).setAttribute("data-type", 8);
+        Q(`#day-${date}`).setAttribute("data-note", paydayDescription);
     });
 }
 showPaydays();
