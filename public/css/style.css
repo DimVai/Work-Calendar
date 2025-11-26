@@ -162,10 +162,10 @@ h3, .month-title {
     color: black;
 }
 .today {
-    background-color: var(--today);
-    color: white;
+    /* background-color: var(--today); */
+    /* color: white; */
     border: 3px solid black;
-    font-weight: 700;
+    /* font-weight: 800; */
 }
 
 .day[data-type="1"] {
