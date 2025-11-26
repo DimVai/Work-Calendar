@@ -58,15 +58,32 @@ function calculateStatistics(year=currentYear) {
         types: {},
         notes: {},
     };
+
+    // Υπολογισμώς ημερών για όλους τους τύπους εκτός από "Άδεια"
     Calendar.days.forEach(day => {
         if (new Date(day.date).getFullYear() !== year) {return}
-        statistics.total++;
-        statistics.types[day.type] = statistics.types[day.type] ? statistics.types[day.type] + 1 : 1;
+        statistics.types[day.type] = (statistics.types?.[day.type]??0) + 1;
     });
+
+    // Υπολογισμός ημερών για "Άδεια" (type '4')
+    // Ημέρες άδειας έτους 2025 είναι όσες έχουν type '4' (αδεια) και:
+    // είτε α) περιέχουν [*2025*] στο note (πχ day.note=="[Χρωστούμενη από 2025]")
+    // είτε β) το day.date είναι μέσα στο 2025 και δεν περιέχουν [*έτος*] στο note (πχ day.note=="Κανονική άδεια")
+    let leaveDays = Calendar.days.filter(day => {
+        if (day.type !== '4') {return false}
+        const noteYearMatch = day.note.match(/\[.*?(\d{4}).*?\]/);    // regex to find [*YYYY*]
+        const noteYear = noteYearMatch ? parseInt(noteYearMatch[1], 10) : null;
+        const dayYear = new Date(day.date).getFullYear();
+        return (noteYear === year) || (dayYear === year && noteYear === null);
+    });
+    statistics.types['4'] = leaveDays.length;
+
     Q("~Έτος").set(currentYear);
     Q("~Άδειες").set(statistics.types[4] || 0);
-    Q("~Ασθένειες").set(statistics.types[6] || 0);
     Q("~Απεργίες").set(statistics.types[5] || 0);
+    Q("~Ασθένειες").set(statistics.types[6] || 0);
+
+    console.log(statistics);
     return statistics;
 }
 calculateStatistics(currentYear);

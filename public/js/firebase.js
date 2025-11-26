@@ -79,7 +79,8 @@ async function loadCalendarFromDB() {
             let CalendarFromDB = doc.data();
             console.debug("Calendar loaded from database");
             // let dbDate = CalendarFromDB.lastUpdade.toDate();
-            if (CalendarFromDB.days?.length>=3 ?? CalendarFromDB.days?.length>=Calendar.size ) {
+            //* Η Βάση υπερισχύει των Local data όταν έχει περισσότερα από 3 στοιχεία ημερολογίου ή έχει περισσότερα στοιχεία από τα local data
+            if ( CalendarFromDB.days?.length>=3 ?? CalendarFromDB.days?.length>=Calendar.size ) {
                 Calendar.lastUpdate = CalendarFromDB.lastUpdade.toDate();
                 Calendar.days = CalendarFromDB.days;
                 localStorage.setItem("days", JSON.stringify(CalendarFromDB.days));
@@ -88,6 +89,7 @@ async function loadCalendarFromDB() {
                 generateCalendar(currentYear);      // (Με το refreshCalendar() δεν θα αποχρωματιστούν οι "παλιές" μέρες. Για αυτό generateCalendar)
                 return CalendarFromDB;
             } else {
+                //* Τα Local data υπερισχύουν όταν η Βάση έχει λιγότερα από 3 στοιχεία ημερολογίου και επίσης λιγότερα από τα Local data
                 console.debug("Calendar in database is almost empty. Overriding it.");
                 saveToDB();
                 return false;
