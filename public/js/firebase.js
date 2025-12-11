@@ -79,8 +79,9 @@ async function loadCalendarFromDB() {
             let CalendarFromDB = doc.data();
             console.debug("Calendar loaded from database");
             // let dbDate = CalendarFromDB.lastUpdade.toDate();
-            //* Η Βάση υπερισχύει των Local data όταν έχει περισσότερα από 3 στοιχεία ημερολογίου ή έχει περισσότερα στοιχεία από τα local data
-            if ( CalendarFromDB.days?.length>=3 ?? CalendarFromDB.days?.length>=Calendar.size ) {
+            const dbDaysLength = CalendarFromDB.days?.length ?? 0;
+            //* Η Βάση υπερισχύει των Local data όταν έχει τουλάχιστον 3 στοιχεία ημερολογίου ή έχει τουλάχιστον όσα και τα local data
+            if ( dbDaysLength>=3 || dbDaysLength>=Calendar.size ) {
                 Calendar.lastUpdate = CalendarFromDB.lastUpdade.toDate();
                 Calendar.days = CalendarFromDB.days;
                 localStorage.setItem("days", JSON.stringify(CalendarFromDB.days));

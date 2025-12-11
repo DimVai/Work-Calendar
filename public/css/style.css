@@ -61,7 +61,7 @@ select, input[type="text"], textarea{
 }
 
 dialog{
-    max-width: 90%;
+    max-width: min(90%, 500px);
     border: 1px solid #333;
     border-radius: 10px;
     padding: 1.5rem 1rem;
