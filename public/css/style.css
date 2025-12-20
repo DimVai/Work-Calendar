@@ -257,6 +257,7 @@ h3, .month-title {
     #year-select{
         text-align: center;
         min-width: 15ch;
+        /* min-width: fit-content; */
         margin: 0;
     }
 }

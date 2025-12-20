@@ -173,16 +173,19 @@ Q(".edit-auto-save").on("input", handleDayChange);      // (το this μεταφ
 
 //# Σκρολλάρισμα της σελίδας στον τρέχοντα μήνα
 function scrollToCurrentMonth() {
-    if (sessionStorage.getItem("alreadyScrolledToCurrentMonth") || window.innerWidth > 1200) {return}
-    const currentMonth = new Date().getMonth() + 1;
-    const targetElement = document.getElementById(`month-${currentYear}-${currentMonth}`);
+    const thisYear = new Date().getFullYear();
+    let targetElement = null;
+    if (currentYear == thisYear + 1) {
+        targetElement = document.getElementById(`month-${currentYear}-1`);
+    } else if (currentYear == thisYear) {
+        const thisMonth = new Date().getMonth() + 1;
+        targetElement = document.getElementById(`month-${currentYear}-${thisMonth}`);
+    }
     if (targetElement) {
         targetElement.scrollIntoView({ behavior: "smooth", /*block: "center"*/ });
-        sessionStorage.setItem("alreadyScrolledToCurrentMonth","true");
     }
 }
 scrollToCurrentMonth();
-// setTimeout(scrollToCurrentMonth,100);
 
 
 //# Copyright 
