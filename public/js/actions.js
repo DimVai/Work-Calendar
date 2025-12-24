@@ -22,7 +22,7 @@ let Calendar = {
     },
     endAction: function() {
         localStorage.setItem("days", JSON.stringify(this.days));
-        calculateStatistics(currentYear);
+        calculateStatistics(selectedYear);
         this.lastUpdate = new Date();
         localStorage.setItem("calendarUpdate", new Date().toISOString());
         const event = new CustomEvent("calendarUpdated", {detail: {days: this.days}});
@@ -52,7 +52,7 @@ if (localStorage.getItem("days")) {
     localStorage.setItem("days", JSON.stringify(Calendar.days));
 }
 
-function calculateStatistics(year=currentYear) {
+function calculateStatistics(year=selectedYear) {
     let statistics = {
         total: 0,
         types: {},
@@ -78,7 +78,7 @@ function calculateStatistics(year=currentYear) {
     });
     statistics.types['4'] = leaveDays.length;
 
-    Q("~Έτος").set(currentYear);
+    Q("~Έτος").set(selectedYear);
     Q("~Άδειες").set(statistics.types[4] || 0);
     Q("~Απεργίες").set(statistics.types[5] || 0);
     Q("~Ασθένειες").set(statistics.types[6] || 0);
@@ -86,7 +86,7 @@ function calculateStatistics(year=currentYear) {
     console.log(statistics);
     return statistics;
 }
-calculateStatistics(currentYear);
+calculateStatistics(selectedYear);
 
 
 
@@ -148,7 +148,7 @@ function handleDayChange() {
         Q("#edit-note").value = '';
 
         // Χρήση του getDefaultDays για συμπλήρωση του data-type και data-note
-        let defaultDays = getDefaultDays(currentYear);
+        let defaultDays = getDefaultDays(selectedYear);
         let defaultDay = defaultDays.find(day => day.date === userDay.date);
         
         if (defaultDay) {
@@ -173,13 +173,13 @@ Q(".edit-auto-save").on("input", handleDayChange);      // (το this μεταφ
 
 //# Σκρολλάρισμα της σελίδας στον τρέχοντα μήνα
 function scrollToCurrentMonth() {
-    const thisYear = new Date().getFullYear();
+    const currentYear = new Date().getFullYear();
     let targetElement = null;
-    if (currentYear == thisYear + 1) {
-        targetElement = document.getElementById(`month-${currentYear}-1`);
-    } else if (currentYear == thisYear) {
-        const thisMonth = new Date().getMonth() + 1;
-        targetElement = document.getElementById(`month-${currentYear}-${thisMonth}`);
+    if (selectedYear == currentYear + 1) {
+        targetElement = document.getElementById(`month-${selectedYear}-1`);
+    } else if (selectedYear == currentYear) {
+        const currentMonth = new Date().getMonth() + 1;
+        targetElement = document.getElementById(`month-${selectedYear}-${currentMonth}`);
     }
     if (targetElement) {
         targetElement.scrollIntoView({ behavior: "smooth", /*block: "center"*/ });

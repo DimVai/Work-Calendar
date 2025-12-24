@@ -4,8 +4,8 @@ const daysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
 const getFirstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
 
 let selectedDayId = null;
-let currentYear = new Date().getFullYear();     
-//TODO: Θα ήταν σωστότερο να ονομαζόταν selectedYear ώστε το currentYear να αναφέρεται στο τρέχον έτος
+let selectedYear = new Date().getFullYear();   
+const baseYear = 2025;  
 
 function generateCalendar(year) {
     selectedDayId = null; // Reset επιλογής ημέρας
@@ -80,7 +80,6 @@ function selectDay(dayId) {
 }
 
 function setupYearSelector() {
-    const baseYear = 2025;
     const finalYear = new Date().getFullYear() + 1; // Έως το επόμενο έτος
     const yearSelect = document.getElementById("year-select");
     for (let year = baseYear; year <= finalYear; year++) {
@@ -89,13 +88,13 @@ function setupYearSelector() {
         option.textContent = year;
         yearSelect.appendChild(option);
     }
-    yearSelect.value = currentYear;
+    yearSelect.value = selectedYear;
     yearSelect.addEventListener("change", (event) => {
-        currentYear = parseInt(event.target.value);
-        generateCalendar(currentYear);
+        selectedYear = parseInt(event.target.value);
+        generateCalendar(selectedYear);
         scrollToCurrentMonth();
     });
 }
 
 setupYearSelector();
-generateCalendar(currentYear);
+generateCalendar(selectedYear);

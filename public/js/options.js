@@ -26,7 +26,7 @@ Q("#custom-type-name").value = Options.customTypeName;
 Q(".options-auto-save").on("change", function() {
     Options[this.name] = this.type === "checkbox" ? this.checked : this.value;    // name, not id
     localStorage.setItem("options", JSON.stringify(Options));
-    generateCalendar(currentYear);
+    generateCalendar(selectedYear);
     // console.log(Options);
 });
 Q("#options-save").on("click", function(){

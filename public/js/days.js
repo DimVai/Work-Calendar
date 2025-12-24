@@ -150,7 +150,7 @@ function getMovingHolidays(year) {
     return movingHolidaysDates;
 }
 
-/** Επιστρέφει τις επίσης αργίες στην Ελλάδα στη μορφή ΕΕΕΕ-ΜΜ-ΗΗ */
+/** Επιστρέφει τις αργίες στην Ελλάδα στη μορφή ΕΕΕΕ-ΜΜ-ΗΗ */
 function getHolidays(year) {
     if (!year) {return new Map()}
     let propperFixedHolidays = new Map();
@@ -159,11 +159,11 @@ function getHolidays(year) {
     });
     let holidays = new Map([...propperFixedHolidays, ...getMovingHolidays(year)]);
     return holidays;
-}     // Σε μορφή ΜΜ-ΗΗ (κι όχι ΕΕΕΕ-ΜΜ-ΗΗ)
+}
 
 // Εμφάνιση αργιών στο ημερολόγιο
 function showHolidays() {
-    getHolidays(currentYear).forEach((holiday, date) => {
+    getHolidays(selectedYear).forEach((holiday, date) => {
         Q(`#day-${date}`).setAttribute("data-type", 3);
         Q(`#day-${date}`).setAttribute("data-note", holiday);
     });
@@ -225,7 +225,7 @@ function getPaydays(year) {
 
 // Εμφάνιση ημερών πληρωμής στο ημερολόγιο
 function showPaydays() {
-    getPaydays(currentYear).forEach((paydayDescription, date) => {
+    getPaydays(selectedYear).forEach((paydayDescription, date) => {
         Q(`#day-${date}`).setAttribute("data-type", 8);
         Q(`#day-${date}`).setAttribute("data-note", paydayDescription);
     });

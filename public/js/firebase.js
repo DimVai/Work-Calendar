@@ -87,7 +87,7 @@ async function loadCalendarFromDB() {
                 localStorage.setItem("days", JSON.stringify(CalendarFromDB.days));
                 Options = CalendarFromDB.options ?? Options;
                 refreshOptions(Options); // Ενημέρωση στο UI και στο dayTypes
-                generateCalendar(currentYear);      // (Με το refreshCalendar() δεν θα αποχρωματιστούν οι "παλιές" μέρες. Για αυτό generateCalendar)
+                generateCalendar(selectedYear);      // (Με το refreshCalendar() δεν θα αποχρωματιστούν οι "παλιές" μέρες. Για αυτό generateCalendar)
                 return CalendarFromDB;
             } else {
                 //* Τα Local data υπερισχύουν όταν η Βάση έχει λιγότερα από 3 στοιχεία ημερολογίου και επίσης λιγότερα από τα Local data
