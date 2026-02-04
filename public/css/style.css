@@ -45,7 +45,7 @@ footer{
     padding-block: 2rem;
 }
 
-select, input[type="text"], textarea{
+select, input[type="text"], input[type="number"], textarea{
     margin: 0.5rem;
     padding: 0.5rem;
     min-width: 22ch;
