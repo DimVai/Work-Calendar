@@ -116,17 +116,36 @@ const fixedholidays = new Map([
     ["12-26", "Σύναξη της Θεοτόκου"],
 ]);
 
-let easter = new Map([
+// Θα χρησιμοποιείται πλέον για εξαιρέσεις κλπ
+let easterMap = new Map([
     [2025, "04-20"],
     [2026, "04-12"],
-    [2027, "05-02"],
-    [2028, "04-16"],
-    [2029, "04-08"],
-    [2030, "04-28"],
-    [2031, "04-13"],
-    [2032, "05-02"],
-    [2033, "04-24"],
 ]);
+
+/** Λαμβάνει ένα έτος σε μορφή yyyy και επιστρέφει την ημερομηνία του Ορθόδοξου Πάσχα σε μορφή mm-dd */
+function calculateEaster(year) {
+  const a = year % 4;
+  const b = year % 7;
+  const c = year % 19;
+  const d = (19 * c + 15) % 30;
+  const e = (2 * a + 4 * b - d + 34) % 7;
+
+  const month = Math.floor((d + e + 114) / 31); // 3=March, 4=April (Julian)
+  const day = ((d + e + 114) % 31) + 1;
+
+  // Julian → Gregorian (+13 days for 1900–2099), NOTE: Το 2100 να το αλλάξω σε +14!
+  const date = new Date(Date.UTC(year, month - 1, day));
+  date.setUTCDate(date.getUTCDate() + 13);
+
+  const mm = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(date.getUTCDate()).padStart(2, "0");
+  return `${mm}-${dd}`;
+}
+
+/** Επιστρέφει την ημερομηνία του Πάσχα για το έτος σε μορφή mm-dd, πρώτα από τον χειροκίνητο χάρτη, αλλιώς υπολογίζει */
+function easterOf(year) {
+    return easterMap.get(year) ?? calculateEaster(year);
+}
 
 const movingHolidays = new Map([
     ["-48", "Καθαρά Δευτέρα"],
@@ -139,7 +158,7 @@ const movingHolidays = new Map([
 
 function getMovingHolidays(year) {
     if (!year) {return new Map()}
-    let easterDate = new Date(`${year}-${easter.get(year)}`);       // Ημερομηνία του Πάσχα
+    let easterDate = new Date(`${year}-${easterOf(year)}`);       // Ημερομηνία του Πάσχα
     let movingHolidaysDates = new Map();
     movingHolidays.forEach((holiday, offset) => {
         let holidayDate = new Date(easterDate);
@@ -191,7 +210,7 @@ function getPaydays(year) {
         [`${year}-08-10`, "Επίδομα Άδειας"],
     ]);
     // Υπολογισμός ημερομηνίας πληρωμής Δώρου Πάσχα (μπορεί να είναι προηγούμενος μήνας)
-    let easterDate = new Date(`${year}-${easter.get(year)}`);
+    let easterDate = new Date(`${year}-${easterOf(year)}`);
     easterDate.setDate(easterDate.getDate() - 4);
     let easterGiftDate = propper(easterDate);
     extraPaydays.set(easterGiftDate, "Δώρο Πάσχα");
