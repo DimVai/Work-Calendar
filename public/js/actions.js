@@ -82,6 +82,20 @@ function calculateStatistics(year=selectedYear) {
     Q("~Άδειες").set(statistics.types[4] || 0);
     Q("~Απεργίες").set(statistics.types[5] || 0);
     Q("~Ασθένειες").set(statistics.types[6] || 0);
+    if (Options.eligible>0 && selectedYear==new Date().getFullYear()) {
+        Q("~Δικαιούμενες").set(` / ${Options.eligible}`);
+        const limit = {warning: Math.floor(Options.eligible/2), danger: Math.floor(Options.eligible/4)};
+        const remaining = Math.max(Options.eligible - leaveDays.length, 0);
+        let leavesColor = 
+            (remaining<=limit.danger) ? "danger" :      
+            (remaining<=limit.warning) ? "warning" :
+            "success";
+        Q("~Άδειες")[0].classList.remove("success","warning","danger");
+        Q("~Άδειες")[0].classList.add(leavesColor)
+    } else {
+        Q("~Δικαιούμενες").set('');
+        Q("~Άδειες")[0].classList.remove("success","warning","danger");
+    }
 
     console.log(statistics);
     return statistics;

@@ -47,7 +47,10 @@
         <div id="panel" class="panel">
             <div class="statistics">
                 <!-- <h4 class="statistics-title">Ετος <span data-variable="Έτος">2025</span></h4> -->
-                <p>Άδειες: <span data-variable="Άδειες">0</span></p>
+                <p class="bold">Άδειες: 
+                    <span data-variable="Άδειες">0</span>
+                    <span data-variable="Δικαιούμενες"></span>
+                </p>
                 <p>Ασθένειες: <span data-variable="Ασθένειες">0</span></p>
                 <p>Απεργίες: <span data-variable="Απεργίες">0</span></p>
             </div>
@@ -88,20 +91,24 @@
         <form method="dialog">
             <div class="checkbox-div">
                 <input type="checkbox" id="hide-paydays" name="hidePaydays" class="options-auto-save">
-                <label for="hide-paydays">Απόκρυψη αυτόματων επισημάνσεων για την κατηγορία "Μισθοδοσία"</label>
+                <label for="hide-paydays">Απόκρυψη αυτόματων επισημάνσεων για την κατηγορία "Μισθοδοσία".</label>
             </div>
             <div class="checkbox-div">
                 <input type="checkbox" id="auto-leave" name="autoLeave" class="options-auto-save">
-                <label for="auto-leave">Αυτόματη επιλογή/αφαίρεση της κατηγορίας "Άδεια" όταν επιλέγεται κάποια ημέρα (η οποία δεν έχει ήδη κατηγορία)</label>
+                <label for="auto-leave">
+                    Αυτόματη επιλογή/αφαίρεση της κατηγορίας "Άδεια" με το κλικ σε κάποια ημέρα.
+                    <!-- (η οποία δεν έχει ήδη κατηγορία). -->
+                    Χρήσιμο για γρήγορη επισήμανση πολλών ημερών άδειας. 
+                </label>
             </div>
             <div class="input-div">
                 <label for="custom-type-name">Όνομα ειδικής κατηγορίας</label>
                 <input type="text" id="custom-type-name" name="customTypeName" class="options-auto-save" maxlength="15" placeholder="Γιορτή">
             </div>
-            <!-- <div class="input-div">
-                <label for="leave-per-year">Άδειες ανά έτος</label>
-                <input type="number" id="leave-per-year" name="leavePerYear" class="options-auto-save" min="0" max="365" step="1" placeholder="22">
-            </div> -->
+            <div class="input-div">
+                <label for="eligible">Δικαιούμενες άδειες τρέχοντος έτους</label>
+                <input type="number" id="eligible" name="eligible" class="options-auto-save" min="0" max="365" step="1" placeholder="22">
+            </div>
             <button type="submit" class="btn btn-ok" id="options-save">OK</button>
         </form>
         <hr>

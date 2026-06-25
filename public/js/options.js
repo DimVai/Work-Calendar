@@ -4,6 +4,7 @@ let Options = {
     autoLeave: false,
     hidePaydays: false,
     customTypeName: "Γιορτή",
+    eligible: 0,
 };
 // Load options from local storage
 if (localStorage.getItem("options")) {
@@ -23,6 +24,7 @@ Q("#options-btn").on("click", function() {
 Q("#hide-paydays").checked = Options.hidePaydays;
 Q("#auto-leave").checked = Options.autoLeave;
 Q("#custom-type-name").value = Options.customTypeName;
+Q("#eligible").value = Options.eligible || '';
 Q(".options-auto-save").on("change", function() {
     Options[this.name] = this.type === "checkbox" ? this.checked : this.value;    // name, not id
     localStorage.setItem("options", JSON.stringify(Options));
@@ -32,6 +34,7 @@ Q(".options-auto-save").on("change", function() {
 Q("#options-save").on("click", function(){
     Options.customTypeName = Options.customTypeName?.length>0 ? Options.customTypeName : "Γιορτή";
     dayTypes[7].name = Options.customTypeName;
+    Options.eligible = parseInt(Q("#eligible").value) || 0;
     fillEditOptions();  // Update the select dropdown options
     saveToDB();
 });

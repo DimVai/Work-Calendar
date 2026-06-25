@@ -12,6 +12,7 @@
 }
 
 
+
 /*************   General   *************/
 
 * {
@@ -278,6 +279,9 @@ h3, .month-title {
     font-weight: normal;
 }
 
+
+
+
 /*************   Offcanvas   *************/
 
 .offcanvas{
@@ -342,5 +346,17 @@ h3, .month-title {
         align-items: center;
         /* text-align: left; */
         label{text-align:right}
+        input {min-width: 0;}
     }
 }
+
+
+
+
+/*************   Utilities   *************/
+
+
+.bold { font-weight: bold }
+.success { color: darkgreen }
+.warning { color: hsl(33, 100%, 20%) }
+.danger { color: darkred }
