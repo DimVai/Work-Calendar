@@ -302,8 +302,10 @@ h3, .month-title {
 }
 #edit select, #edit textarea{
     width: 22ch;
-    field-sizing: content;
-    min-height: 2.3rem;
+    field-sizing: content;              /* New CSS property (2026) - dynamic vertical size */
+    min-height: calc(1lh + 1rem);       /* 1rem is the total vertical padding of the input */
+    max-height: calc(2lh + 1rem);       /* 1rem is the total vertical padding of the input */
+    resize: none;                       /* When user resizes it, "field-sizing: content" no longer applies */
 }
 .edit-form{
     /* border: 1px solid #ccc; */
