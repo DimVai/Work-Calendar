@@ -16,5 +16,12 @@
             "sizes": "512x512",
             "type": "image/png"
         }
-      ]
+      ],
+    "related_applications": [
+        {
+            "platform": "play",
+            "id": "app.web.dim_work_calendar.twa"
+        }
+    ],
+    "prefer_related_applications": true
 }
